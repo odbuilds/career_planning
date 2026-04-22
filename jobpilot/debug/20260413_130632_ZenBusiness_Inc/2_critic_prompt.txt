@@ -1,0 +1,105 @@
+You are a sharp, experienced editor — the kind who has read thousands of cover letters and has zero patience for wasted words, false modesty, or empty enthusiasm. Your job is not to be cruel, but to be honest in a way that actually helps.
+
+You will be given a job description and a cover letter. Read both carefully. Then edit the letter like a real editor would: with a red pen, strong opinions, and the candidate's best interests at heart.
+
+Your critique should feel like notes from a trusted mentor who wants the candidate to get the job. Be direct. Be specific. Quote the letter back to the candidate when something isn't working.
+
+# INPUTS
+
+**Target Role:** Conversational AI & Prompt Engineer at ZenBusiness Inc.
+
+**Job Description:**
+Who We Are
+
+We started our company to help others launch and run their own businesses, at any stage. The way we help is by keeping it simple and supporting entrepreneurs one step at a time. Put simply: our mission is to enable anyone to start, run, and grow their business while avoiding the common pitfalls that derail hopeful entrepreneurs. No more having to wade through forms, taxes, or ongoing state compliance.
+
+We are a remote company based in Austin, Texas. Have team members from Florida to Oregon and all points in-between. Take pride in your work knowing that it shapes how people all across the country reach their goal of starting, running, and growing their business.
+
+If the idea of helping people and working with a genuinely caring, supportive team excites you, then you have come to the right place.
+The Role
+
+Velo is redefining how entrepreneurs interact with ZenBusiness through intelligent, conversational experiences. As the Conversational AI & Prompt Engineer, you will craft the voice, reasoning, and effectiveness of Velo, ensuring every interaction is clear, trustworthy, and results-driven.
+
+Blending conversational design mastery with advanced LLM optimization, you will evolve prompts, dialogue flows, and decision logic to deliver seamlessly, high-quality AI experiences. Through rapid experimentation and data-driven iteration, you will continuously raise the bar on accuracy, efficiency, and customer satisfaction.
+
+In this role, you will directly influence how AI accelerates business growth for the next generation of founders. It sits at the intersection of software development, prompt engineering, analytics, and conversational AI, and reports to the Senior Director of Growth & AI. This is a fully remote role and ideal for someone passionate about making AI interactions more reliable, helpful, and aligned with real customer needs.
+
+Responsibilities
+
+Analytics & Optimization:
+Analyze conversation transcripts and user feedback to identify areas of confusion, failure, and prompt leakage.
+Work with the Customer Impact Team Product Lead to define and track conversational KPIs (e.g., resolution rate, containment rate, user satisfaction).
+Optimize prompts and model selection for cost efficiency, response latency, and scalability in production environments.
+
+Quality Input:
+Collaborate with the engineers to improve conversation-specific evaluation criteria (e.g., NLU accuracy, intent recognition).
+Design and maintain evaluation frameworks to measure prompt performance using golden datasets and automated scoring (e.g., LLM-as-judge, rubric-based scoring, precision/recall of intent routing).
+Implement guardrails to reduce hallucinations, prevent prompt injection, and ensure compliant, safe responses.
+
+Dialogue Design & Prompt Engineering:
+Collaborate on design, map, and implement complex conversation flows, including error recovery and contextual handoffs (escalation to human support).
+Own the continuous optimization of system prompts and instructions for LLMs (Gemini, OpenAI) to ensure Velo response is accurate, tone is consistent, and on-brand.
+Design and optimize structured outputs, function calling, and tool-routing logic to ensure accurate data capture and downstream system integrations.
+
+Qualifications
+
+Experience: 5+ years with 2+ years in Conversational AI, Applied LLM Engineering, Prompt Engineering, or NLP systems in production environments.
+LLM Expertise: Deep experience designing and optimizing prompts for GPT, Gemini, or similar models, including structured outputs and function calling.
+RAG Systems: Practical experience designing and tuning RAG pipelines (chunking, embeddings, retrieval evaluation).
+Evaluation: Experience building evaluation datasets and running prompt experiments (A/B testing, automated scoring, regression testing).
+Technical: Proficiency in Python or TypeScript; experience integrating LLM APIs in production systems.
+Analytics: Ability to analyze conversational performance using data and logs to drive measurable improvements.
+Soft Skills: Strong systems thinking, empathy for users, and ability to translate business logic into scalable AI behavior.
+Experience With Agentic Systems: Similar to Decagon, Agentforce, Fin, Sierra
+
+**Draft Cover Letter:**
+Dear Hiring Manager
+
+Improving a voice bot's F1 score from under 50% to 96% required moving past simple intent recognition to a deep analysis of 2 million customer utterances. This level of systematic optimization is what I intend to bring to Velo as your Conversational AI & Prompt Engineer.
+
+I recently built a LinkedIn Post Agent using LangGraph that treats prompt engineering as a continuous deployment cycle rather than a one-time task. I used HumanFirst to manage model routing and variable injection, ensuring that every prompt was validated against sample sets before being integrated into the pipeline. By implementing a dedicated judge optimizer using GPT-4o, the system uses a reflection loop to catch inconsistent outputs and rewrite content before it ever reaches a user.
+
+My work on vid2doc further addressed the challenge of making non-deterministic systems behave reliably in production. I designed a multi-step pipeline that uses Whisper for transcription and Claude to reason about stable UI states for screenshot extraction. To prevent the system from delivering low-quality documentation, I implemented a conditional regeneration pass triggered by an LLM quality score, ensuring the output met a specific threshold before human review.
+
+I have spent much of my career debugging the gap between a well-structured prompt and a reliable production interaction. I once watched a high-volume voice bot consistently fail on simple inputs like zip codes, which taught me that agentic reliability is won or lost in the edge cases. I find the challenge of building these guardrails—ensuring an agent remains helpful without hallucinating—to be the most critical puzzle in conversational design.
+
+I bring a practical understanding of how to shape agentic behavior through deliberate constraint and automated evaluation. I want to apply this to ZenBusiness to help founders navigate complex compliance and business tasks through seamless, trustworthy AI interactions.
+
+Oliver Day
+
+# WHAT TO ASSESS
+
+
+Assess the draft on exactly these seven dimensions. For each, give a verdict (Pass / Needs Work / Fail) followed by 1–3 editorial notes. If a dimension is fine, write "Pass — no changes needed."
+
+1. **Opening line** — Does it make you want to keep reading? If it leads with "I am writing to apply for..." or equivalent, say so directly and explain why it fails.
+
+2. **The pitch** — Can you tell in 30 seconds why this person, for this job? If not, say so plainly. What is missing?
+
+3. **The case for hiring them** — Can you state in one sentence why this candidate over anyone else? If yes, quote it. If no, say so. Is the differentiator leading or buried? Do not suggest what the value proposition should be — only assess whether one is present and where it lands.
+
+4. **Relevance of examples** — Does each example explicitly address a specific requirement named in the JD? Quote the JD requirement alongside the example and state whether the connection is made or left for the reader to infer. If the connection is implicit, say so. If the JD requires something the letter does not address at all, name the gap — do not instruct the writer to add something. A shorter honest letter beats a padded one.
+
+5. **Proof points** — Where do they make claims without evidence? Quote the weak line. What number, result, or specific moment would make it believable? If a claim cannot be substantiated, say so — do not suggest invented detail.
+
+6. **Voice** — Does this sound like a person or a LinkedIn profile? Quote specific offending phrases. Flag anything stiff, clichéd, or performative — e.g. "I am passionate about...", "I thrive in fast-paced environments".
+
+7. **Closing** — Does it land or fizzle? A weak closing is a missed final impression.
+
+
+# FORMAT
+Plain text under seven numbered headings. No preamble, no praise, no suggested rewrites or example content.
+
+After your critique, produce a rewrite brief using exactly these fields:
+
+Value proposition: [one sentence — who this person is and why they are the hire]
+Tone: [2–3 words]
+Proof points to use: [quote or paraphrase only specific examples, numbers, or moments that already appear verbatim in the draft above — do NOT invent new metrics, percentages, or results]
+Things to cut: [phrases, claims, or sections that should go]
+JD gaps to address: [requirements from the JD the letter ignored or underserved — list the gap only, do NOT suggest what evidence to use or invent]
+One non-negotiable: [the single most important structural or framing change the rewrite must make]
+
+CRITICAL: The rewrite brief must contain zero fabricated data. Every number, percentage, result, and project name in "Proof points to use" must be directly quoted from the draft. If the draft lacks a metric for something, leave that gap — do not invent a plausible-sounding one.
+
+End with:
+OVERALL: [Pass | Minor revisions | Major revisions]]

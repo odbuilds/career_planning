@@ -1,0 +1,21 @@
+<planning>
+archetype: Agentic/Automation
+project_1: LinkedIn Post Agent — demonstrates the exact "agentic" requirement using LangGraph, HumanFirst, and a reflection loop to ensure high-quality, brand-consistent output.
+project_2: vid2doc — showcases multi-step LLM pipeline design, structured JSON output, and a specific "LLM quality review" loop to mitigate non-deterministic failure modes.
+hook: Moving from simple chatbots to agentic systems requires shifting focus from basic intent recognition to the deliberate shaping of non-deterministic behavior. I am applying for the Conversational AI & Prompt Engineer role to help Velo navigate this complexity.
+angle: Frame Oliver as a practitioner who understands that agent reliability comes from rigorous evaluation and iterative prompt shaping, not just clean code.
+</planning>
+
+Dear Hiring Manager,
+
+Moving from simple chatbots to agentic systems requires shifting focus from basic intent recognition to the deliberate shaping of non-deterministic behavior. I am applying for the Conversational AI & Prompt Engineer role to help Velo navigate this complexity.
+
+I built a LinkedIn Post Agent using LangGraph and HumanFirst to produce high-fidelity content in a specific user voice. The pipeline utilizes a reflection loop where a dedicated judge optimizer evaluates outputs, triggering conditional rewrites to ensure brand consistency. This approach moved the challenge of reliability away from the code and into a structured, iterative prompt-shaping workflow.
+
+With my vid2doc project, I designed a multi-step pipeline to transform video recordings into structured documentation. By integrating Whisper for transcription and using Claude via HumanFirst for reasoning, I implemented an LLM quality review step that triggers regeneration if scores fall below a specific threshold. This allowed me to catch flow problems at the prompt level through parallel testing before a single line of the React frontend was finalized.
+
+I am fascinated by the granular mechanics of why agents fail—specifically how a single ambiguous instruction can lead to hallucination or tool-calling errors in production. During my work with the TRAIL benchmark, I saw how state-of-the-art models struggle to identify even basic execution errors in agent traces. This reinforces my belief that Velo’s success depends on building robust evaluation frameworks and guardrails that treat AI behavior as something to be constantly monitored and constrained.
+
+I bring the ability to turn unpredictable LLM outputs into reliable, scalable conversational experiences through rigorous evaluation and prompt orchestration.
+
+Oliver Day

@@ -1,0 +1,15 @@
+UNSOURCED: "reducing a voice bot’s mis-routes from 12 % to 4 % with a four-line guardrail tweak" — not found in source materials
+UNSOURCED: "Velo’s containment rate" — not found in source materials
+UNSOURCED: "ZenBusiness founders" — not found in source materials
+SOURCED: "migrated a 100 k-contact/month voice bot from Dialogflow ES to CX" — found in [CV / Project Evidence]
+SOURCED: "clustering two million utterances in HumanFirst" — found in [CV / Project Evidence]
+SOURCED: "collapsed 950 intents into 200" — found in [CV / Project Evidence]
+SOURCED: "lifted F1 from <50 % to 96 %" — found in [CV / Project Evidence]
+SOURCED: "entity-first design raised confident coverage to 65 %" — found in [CV / Project Evidence]
+UNSOURCED: "cutting live-agent escalations within four weeks" — not found in source materials
+SOURCED: "vid2doc, a side project that converts screen-recordings into docs" — found in [Project Evidence]
+SOURCED: "An LLM-as-judge scores each draft 1–10; anything under 8 triggers an automatic regeneration loop" — found in [Project Evidence]
+SOURCED: "Parallel testing on five real transcripts" — found in [Project Evidence]
+UNSOURCED: "saved an estimated 18 dev hours" — not found in source materials
+SOURCED: "Prompts live in HumanFirst" — found in [Project Evidence]
+SOURCED: "React frontend" — found in [Project Evidence]

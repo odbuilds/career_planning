@@ -1,0 +1,21 @@
+<planning>
+archetype: Agentic/Automation
+project_1: LinkedIn Post Agent — directly demonstrates LangGraph orchestration, prompt-first development in HumanFirst, and the use of automated evaluation/reflection loops mentioned in the JD.
+project_2: vid2doc — showcases complex multi-step LLM pipeline design, structured JSON chaining, and the use of LLM-based quality scoring to handle non-deterministic outputs.
+hook: Improving a voice bot's F1 score from under 50% to 96% required moving past simple intent recognition to a deep analysis of 2 million customer utterances. This insight is central to the Conversational AI & Prompt Engineer role at ZenBusiness Inc.
+angle: Frame Oliver as a practitioner who understands that agentic reliability comes from rigorous prompt engineering, evaluation frameworks, and managing non-deterministic behavior rather than just writing code.
+</planning>
+
+Dear Hiring Manager
+
+Improving a voice bot's F1 score from under 50% to 96% required moving past simple intent recognition to a deep analysis of 2 million customer utterances. This level of systematic optimization is what I intend to bring to Velo as your Conversational AI & Prompt Engineer.
+
+I recently built a LinkedIn Post Agent using LangGraph that treats prompt engineering as a continuous deployment cycle rather than a one-time task. I used HumanFirst to manage model routing and variable injection, ensuring that every prompt was validated against sample sets before being integrated into the pipeline. By implementing a dedicated judge optimizer using GPT-4o, the system uses a reflection loop to catch inconsistent outputs and rewrite content before it ever reaches a user.
+
+My work on vid2doc further addressed the challenge of making non-deterministic systems behave reliably in production. I designed a multi-step pipeline that uses Whisper for transcription and Claude to reason about stable UI states for screenshot extraction. To prevent the system from delivering low-quality documentation, I implemented a conditional regeneration pass triggered by an LLM quality score, ensuring the output met a specific threshold before human review.
+
+I have spent much of my career debugging the gap between a well-structured prompt and a reliable production interaction. I once watched a high-volume voice bot consistently fail on simple inputs like zip codes, which taught me that agentic reliability is won or lost in the edge cases. I find the challenge of building these guardrails—ensuring an agent remains helpful without hallucinating—to be the most critical puzzle in conversational design.
+
+I bring a practical understanding of how to shape agentic behavior through deliberate constraint and automated evaluation. I want to apply this to ZenBusiness to help founders navigate complex compliance and business tasks through seamless, trustworthy AI interactions.
+
+Oliver Day

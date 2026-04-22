@@ -1,0 +1,13 @@
+Dear Hiring Manager,
+
+I’m applying for the Conversational AI & Prompt Engineer role to turn small, measurable moves into compounding wins.
+
+Last year I migrated a 100 k-contact/month voice bot from Dialogflow ES to CX. By clustering two million utterances in HumanFirst I collapsed 950 intents into 200 and lifted F1 from <50 % to 96 %. The new entity-first design raised confident coverage to 65 %. I track the same metrics you called out—resolution, containment, latency—because I’ve seen them move when evaluation is wired into CI.
+
+I used the same discipline for vid2doc, a side project that converts screen-recordings into docs. An LLM-as-judge scores each draft 1–10; anything under 8 triggers an automatic regeneration loop. Parallel testing on five real transcripts caught flow errors before the React frontend existed. Prompts live in HumanFirst, so the eval rubric ships with the feature and updates without code.
+
+I keep building these loops because I’m hooked on the moment an ambiguous instruction surfaces in a trace and you realise the model isn’t wrong—it’s unbounded. I want to be the one writing the guardrails that turn edge cases into clean resolutions.
+
+I bring the toolkit that moves LLMs from interesting to reliable—measure, edit, ship, repeat. Let’s put it to work.
+
+Oliver Day

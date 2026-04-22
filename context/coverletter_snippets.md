@@ -1,0 +1,25 @@
+Snippet on developing workflows and priotising
+I build things and I solve problems, especially when the playbook doesn't exist yet.
+Last year, our startup pivoted hard: from 24 people serving enterprise clients to 8 people building a product for small businesses and end users. Overnight, our sales team was gone. Our Director of Customer Success was gone. What remained was a portfolio of enterprise clients who still needed support and a completely new market we hadn't touched.
+So I figured it out. I redistributed our enterprise accounts with my one remaining colleague and used n8n and Claude to automate or streamline support wherever possible, keeping clients covered without the headcount. Then I built the outbound engine from scratch: n8n workflows and APIs to identify, filter, and reach prospects on LinkedIn, data analysis agents to monitor progress and run A/B tests on messaging, and a demo pipeline that routed high-value partnership opportunities to our CEO and Chief of Staff. I became the entire go-to-market function, booking 20 product demos and user interviews a week and running them myself, pulling in leadership when partnership potential warranted it. I then built agents to process the weekly transcriptions and synthesize them into insight reports, turning 10+ hours of conversations into actionable product and market intelligence for the team.
+
+Snippet on why my background is relevant
+
+Before AI agents became the main human-computer interaction, there were chatbots. First simple button-based workflows, then intent-driven systems connected to APIs through tools like Dialogflow and IBM Watson. I’ve worked through that entire progression.
+
+I was building workflows before tools like Zapier or n8n existed, thinking in classifications before prompting became a discipline, and using early models like Davinci to shape tone before that was standard practice. A large part of my experience has come from working directly with real interactions—reading thousands of conversation transcripts to understand where systems break, and why.
+
+That includes debugging issues that only show up in production, like voice bots consistently failing on something as simple as a zip code, or understanding how language varies across different user groups and how that impacts system behavior. I’ve also spent a lot of time translating concepts like semantic similarity and embeddings to non-technical stakeholders, helping teams align on what these systems are actually doing.
+
+That background has shaped how I approach AI. I don’t see these systems as something you “build and deploy” and then expect to adapt on their own. They are non-deterministic systems that require deliberate design, constraint, and ongoing oversight. Much of the current wave of AI development is overly focused on the technology itself, with the assumption that capability will translate directly into value. In practice, that rarely holds without careful shaping and iteration.
+
+What that experience has given me is a clear view of what modern AI systems really are: non-deterministic components that need to be guided, constrained, and monitored to behave reliably. AI agents are a continuation of that same challenge, not a completely new one, and my background is grounded in making those systems work in practice.
+
+
+I’ve also worked directly with modern agent frameworks, including building systems in LangGraph, so I’m familiar with how these systems are implemented in practice. What that has reinforced for me is that while tooling and code define the structure, they don’t determine the outcome. Agentic systems are inherently non-deterministic, and their reliability depends on how their behavior is shaped—through constraints, evaluation, and iteration. My background in designing and debugging conversational systems directly addresses that layer, which is as critical to agent performance as the underlying implementation.
+
+
+My experience includes building agent workflows using LangGraph, which has given me a practical understanding of how orchestration layers are implemented. However, the limiting factor in these systems is rarely the graph structure itself. Performance is determined by how well the system handles ambiguity, edge cases, and variation in user input. My background in conversational AI—particularly in analyzing real interaction data and diagnosing system failures—directly applies to this layer. It complements technical implementation, but more importantly, it addresses a constraint that is equally critical to system reliability.
+
+
+I’ve built systems using LangGraph and similar frameworks, so I’m comfortable with the implementation side of agentic architectures. What I’ve consistently seen is that the difficulty is not in wiring the system together, but in making it behave correctly once deployed. These systems do not become reliable simply because they are well-structured in code. They require deliberate shaping, evaluation, and iteration based on real user behavior. That is the focus of my experience, and it is as essential to building effective agents as the technical stack itself.

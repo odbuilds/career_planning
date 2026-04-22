@@ -1,0 +1,29 @@
+# Secrets and credentials
+.env
+*.env
+
+# Database (personal data, don't commit)
+*.db
+*.db-shm
+*.db-wal
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+
+# Logs
+*.log
+nohup.out
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Streamlit
+.streamlit/

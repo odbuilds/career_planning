@@ -1,0 +1,289 @@
+You are a fact-checker for a cover letter. Your only job is to find claims in the letter that cannot be verified in the source materials below.
+
+# SOURCE MATERIALS
+
+**CV:**
+# OLIVER DAY
+oliver.p.day@gmail.com | +381 603388856 | linkedin.com/in/dayoliver
+
+---
+
+## Profile
+
+Conversational AI practitioner with 10+ years across the full arc of enterprise AI — from managing large-scale customer service operations through NLU model development to LLM-powered agentic systems. Background spans both sides of the problem: the operational reality of running contact centre AI and the technical work of building, evaluating, and improving it. Work sits at the intersection of implementation and quality — designing conversational experiences that handle real customer intent at scale, building NLU models that hold up in production, and deploying LLM systems that improve measurably over time.
+
+---
+
+## Experience
+
+### Conversational AI Developer — HumanFirst
+*November 2023 – Present*
+
+- Designed and deployed conversational AI solutions across Dialogflow, Kore.AI, and Microsoft Copilot for enterprise clients — end-to-end delivery covering solution architecture, conversation design, NLU model development, entity and intent modelling, and integration with existing operational workflows and data pipelines
+- Designed and deployed an LLM-as-judge evaluation pipeline for a global insurance firm — automated analysis of production customer service conversations to monitor agent adherence to quality guidelines at scale, replacing manual QA review
+- Built a prompt orchestration and evaluation framework for an international mortgage brokerage — multi-prompt pipeline integrated with BigQuery/Looker to surface performance insights and drive iterative improvement in customer-facing AI responses
+- Led the migration of a high-volume voice bot (100,000+ monthly contacts) from Dialogflow ES to CX — rebuilt NLU architecture using HumanFirst clustering on 2 million customer utterances, reducing intents from 950 to under 200 and improving F1 from below 50% to 96%; redesigned to entity-based recognition to better handle natural language variation and support future generative AI features
+- Led NLU model optimisation programmes for enterprise clients — systematic analysis of production conversation data to identify intent classification failures, coverage gaps, and training data weaknesses, driving measurable quality improvements
+- Designed and built a production agentic workflow using LangGraph and n8n — multi-stage LLM pipeline for personalised outreach at scale, demonstrating application of conversational AI techniques beyond chatbot channels
+- Delivered enterprise AI training programmes on conversational AI design, prompt engineering, and LLM evaluation, enabling client teams to maintain and improve deployed systems independently
+
+### Conversation Engineer — Conversation Design Institute Services
+*October 2021 – October 2023*
+
+- Consulted on conversational AI strategy, platform selection, and NLU implementation for enterprise clients in financial services and pharmaceutical sectors managing high-volume, quality-critical customer interactions
+- Led NLU model improvement programmes — systematic conversation data analysis to identify failure patterns, retrain models, and demonstrate measurable quality improvements across production systems
+- Designed a structured consulting methodology for matching conversational AI platforms to client requirements based on technical needs, interaction complexity, and operational context
+- Led R&D for CDI's LLM consulting offering — researching emerging LLM capabilities and translating into structured implementation and evaluation frameworks for enterprise adoption
+- Designed and delivered client workshops on NLU model evaluation, conversation flow design, intent architecture, and building on low-code conversational AI platforms
+
+### Conversation Designer — Travtus
+*July 2021 – April 2023*
+
+- Designed conversational AI experiences and built NLU models for a property management platform — covering tenant and landlord interactions across complex multi-step workflows including maintenance requests, lease queries, and payment processes at high volume
+
+---
+
+## Projects
+
+**FAQ Generation and Knowledge Base** *(Client Project — European CPaaS Provider)*
+Processed 50,000+ customer conversations using generative AI to build a structured, action-oriented knowledge base — each entry pairs a detailed problem description with a step-by-step resolution guide, optimised for RAG retrieval. The core design challenge was conversation analysis at scale: extracting the real shape of customer contact reasons from unstructured interaction data and translating it into documentation that maps directly to how customers actually describe problems. Stack: HumanFirst, generative AI conversation analysis.
+
+**Sales Objection Analysis** *(Client POC — Latin American Call Centre)*
+Rapid POC analysing 20,000+ customer conversations to identify, classify, and respond to sales objections. Used generative AI to build a classification model mapping objection types to successful agent response strategies — findings delivered alongside reusable prompt engineering methodology so the client could apply the approach independently. Completed in one week. Stack: HumanFirst, generative AI conversation analysis.
+
+---
+
+## Capabilities
+
+- Conversational AI design and deployment — Dialogflow, Kore.AI, Microsoft Copilot, intent and entity architecture, multi-turn conversation design
+- NLU model development and optimisation — intent classification, training data curation, failure pattern analysis, iterative quality improvement
+- LLM evaluation design — LLM-as-judge for customer service quality, prompt pipeline assessment, production monitoring
+- Contact centre AI — operational context, quality frameworks, human escalation design, agent assist
+- Agentic workflow development — LangGraph, n8n, multi-step LLM pipelines
+- Prompt engineering and pipeline design — HumanFirst, prompt-first development methodology
+- Enterprise AI training and enablement — workshop design and delivery for technical and operational teams
+
+---
+
+## Education
+
+**Knox College**, Galesburg, Illinois
+Bachelor of Arts — Political Science and Biology, 2005
+
+**London School of Commerce**, Belgrade, Serbia
+MBA with Distinction, 2013
+
+
+**Project Evidence:**
+# Projects
+
+## Personal & Internal Projects
+
+### Research Agent with Lovable Frontend
+Built for a client whose account executives needed to track clients and prospects in the news and draft outreach emails in the AE's tone of voice when news articles identified an opportunity.
+
+Built as a proof of concept integrating HumanFirst with Lovable — HumanFirst as the environment for writing, iterating, and testing prompts; Lovable handling the frontend and workflow. Pipeline: OpenAI with web search first finds URLs of relevant news articles → per-URL search to summarise relevant info → third prompt creates a final report → additional prompts identify outreach opportunities and draft outreach emails → iterated over a list of companies, outputting a summary report and relevant outreach email per company where opportunities were apparent. Backend connection via Supabase; main engineering challenge was timeout handling across chained prompts. Further improved with a reflection loop — review the report, identify gaps, generate new search queries, and rewrite.
+
+Stack: Lovable, Supabase, OpenAI (web search), HumanFirst.
+
+Skills evidenced: multi-step LLM pipeline design, reflection loop architecture, prompt iteration in HumanFirst, Lovable + HumanFirst integration, timeout/async handling in chained workflows.
+
+---
+
+### Internal LinkedIn Outreach Automation
+Following a company restructure that reduced the team from 22 to 8 and removed the sales function, built an automated LinkedIn outreach process used for both pipeline development and product interviews/demos.
+
+Built in n8n: scraped LinkedIn for posts matching keywords related to strategic needs → 500+ profiles filtered by location and role → generative AI filtered by post content for high-specificity targeting → outreach messages drafted with gen AI with A/B testing over content. Results exported to a database with deduplication checks to prevent repeat outreach. Managed API rate limits and scrape quotas with complex handling logic. Reached over 15,000 profiles.
+
+Results: 70% connection rate, 40% response rate, 20% free access signup, 10% demo booked, 7% demo attended.
+
+Stack: n8n, LinkedIn scraping (external tool), generative AI (message drafting), database deduplication layer.
+
+Skills evidenced: workflow automation, lead enrichment pipeline, A/B testing of AI-generated content, rate limit and quota management, conversion funnel instrumentation.
+
+---
+
+
+
+### vid2doc
+POC to convert screen-recording videos (product walkthroughs, demo recordings) into professional "how to" documentation automatically — timestamped screenshots included, output as styled HTML/PDF.
+
+Pipeline: video upload → Whisper transcription with timestamps → LLM extracts key concepts → LLM drafts markdown doc with screenshot placeholders → LLM selects optimal frame timestamps (reasoning about stable UI states, avoiding motion blur) → Canvas-based browser frame extraction (chosen over FFmpeg due to Supabase function size limits) → LLM quality review scores 1–10, triggers one conditional regeneration pass if below threshold → human review in split-screen markdown editor → styled HTML/PDF output.
+
+Grew from 5 to 7 prompts during development — consistency problems found during parallel testing in HumanFirst drove the additions. All prompts designed and chain-tested in HumanFirst before building the Lovable app, using 5 real transcripts in parallel. This caught flow problems at prompt level rather than after the full app was built. Prompts live in HumanFirst rather than buried in Lovable code, so they can be iterated without touching the frontend.
+
+Stack: Lovable (React/TypeScript), Supabase, OpenAI Whisper, Claude via HumanFirst, Canvas API for frame extraction, weasyprint for PDF.
+
+Skills evidenced: multi-step LLM pipeline design, structured JSON prompt chaining, iterative prompt development with parallel input testing, human-in-the-loop workflow design, constraint-driven technical decisions (browser-native extraction over server-side processing), HumanFirst + Lovable integration.
+
+---
+
+### Agent Trace Evaluation Tool (TRAIL Benchmark)
+Built to test the capabilities of HumanFirst, HumanFirst MCPs, and Claude Code for LLM evaluation pipelines.
+
+Pipeline to evaluate AI agent execution traces using the PatronusAI TRAIL benchmark (148 annotated OpenTelemetry traces, 841 labelled errors — state-of-the-art LLMs identify only ~11% correctly). Raw traces from HuggingFace are walked span-by-span, harness spans excluded, and uploaded to HumanFirst as structured utterances with full TRAIL labels as metadata. LLM prompts then run over each span to extract semantic dimensions (Action, Reasoning, Plan, Tool Call, Assumption, Decision Point) and sub-attributes (Soundness, Validity, Optimality). PQL queries over the pipeline outputs enable semantic similarity search and metadata filtering to cluster and detect agent error patterns at scale.
+
+A local browser-based trace viewer (single HTML file + Python server) lets you navigate span trees, see LLM-extracted artifacts inline, pass/fail individual spans, add notes, and upload annotations back to HumanFirst.
+
+Key engineering problems solved: raw traces range from 96KB to 9MB — CSV upload failed across six attempts due to embedded newlines in LLM output fields; JSON format via HumanFirst objects SDK was the fix. PQL has no joins, so cross-artifact queries (e.g. plan compliance detection) required a two-step approach: find Plans referencing tool use, then check sibling spans for Tool Call artifacts by exampleId.
+
+Stack: Python, HumanFirst (workspaces, prompt pipelines, PQL), HuggingFace datasets, local HTTP server, vanilla JS frontend.
+
+Skills evidenced: agent trace analysis, OpenTelemetry span tree parsing, LLM-as-evaluator prompt design, semantic dimension extraction, PQL query design, data pipeline debugging (format incompatibility at scale), browser-based annotation tooling, HumanFirst SDK.
+
+---
+
+### LinkedIn Post Agent
+Takes a rough idea or URL-with-take and produces a LinkedIn post in the user's voice. LangGraph pipeline: idea refinement → optional research → draft writing → tone adjustment → review → conditional rewrite (max 2×) → finalisation.
+
+All LLM calls route through HumanFirst — the code handles routing and Pydantic validation only; model choice, temperature, system prompts, and variable injection are managed in HumanFirst. Prompts were built and tested in HumanFirst before any pipeline code was written: mention syntax failures, inconsistent JSON output from the idea refiner, and over-permissive review calibration were all caught at prompt level against 20 samples before touching a running pipeline. Claude Code built the workspace, collections, intents, and all prompts via the HumanFirst MCP, then built the full LangGraph agent once prompts were validated.
+
+Traces go to LangSmith for per-node observability. GEPA (Generative Evaluation and Prompt Adjustment) integration is built and waiting on a labelled dataset. A dedicated judge optimiser is configured for LinkedIn post quality — binary good/bad classification with reasoning, using GPT-4o-mini for evaluation and GPT-4o for reflection. Once a labelled CSV exists, GEPA analyses failure cases, generates candidate prompt revisions, and evaluates them; the winning prompt gets promoted back into HumanFirst without touching pipeline code.
+
+Stack: LangGraph, HumanFirst (prompts, variable injection, model routing), LangSmith (tracing), Pydantic, Claude Code + HumanFirst MCP.
+
+Skills evidenced: LangGraph pipeline design with conditional routing, prompt-first development methodology, HumanFirst MCP-driven workspace setup, Pydantic validation for LLM output schemas, LangSmith observability, GEPA automated prompt optimisation, separation of prompt logic from routing logic.
+
+---
+
+## Client Work
+
+### AI Training and Enablement Program — Canadian Engineering Firm
+*HumanFirst*
+
+Designed and delivered a comprehensive generative AI training program transforming 40 non-technical business users into proficient AI practitioners over 2 months. Over 60% of participants implemented unique AI use cases and maintained weekly usage patterns. Mentored individuals through the full project lifecycle from use case discovery to implementation, resulting in diverse applications including: marketing content repurposing, automated vendor documentation analysis, internal training material generation, Jira ticket trend analysis, code assistance for non-developers, and automated audio transcription with templated data extraction.
+
+---
+
+### Dialogflow Platform Migration and Optimisation — Enterprise Voice AI
+*HumanFirst*
+
+Led the migration of a high-volume voice bot (100,000+ monthly contacts) from Dialogflow ES to CX over 6 months. Reduced intents from 950 to under 200 through analysis of 2 million customer utterances using HumanFirst clustering and universal sentence embedding. Increased F1 score from below 50% to 96%, expanding model coverage to over 65% of intents at 70% confidence. Transformed architecture to entity-based recognition, enabling future generative AI features.
+
+---
+
+### FAQ Generation and Knowledge Base Development — European CPaaS Provider
+*HumanFirst*
+
+Processed 50,000+ customer conversations using generative AI to create a comprehensive, action-oriented FAQ database. Engineered a structured knowledge base pairing problem descriptions with step-by-step resolution guides, optimised for RAG implementation.
+
+---
+
+### Marketing Intelligence Analysis — European CPaaS Provider
+*HumanFirst*
+
+Led sentiment analysis by scraping and analysing product reviews using GPT-4/GPT-4-mini to extract feature-specific satisfaction levels. Constructed a hierarchical taxonomy of customer feedback themes to inform data-driven product and marketing strategy decisions.
+
+---
+
+### Microsoft Copilot Chatbot POC — Leading Canadian Parcel Delivery Service
+*HumanFirst*
+
+Led POC exploring Microsoft Copilot integrated with Azure CLU, analysing 10,000 customer service conversations to identify intents and auto-generate conversation flow designs. Conducted evaluation revealing RAG hallucination risks and demonstrated CLU advantages over Copilot's native NLU. Delivered findings within 4 weeks.
+
+---
+
+### Prompt Engineering for Insurance Industry Analytics
+*HumanFirst*
+
+Designed prompts for analysing customer-broker conversations using Speechmatics, Anthropic, and HumanFirst. Built evaluation framework comparing AI classifications against human baselines. Contributed to analysis of 50,000+ conversations for reporting via BigQuery and Looker.
+
+---
+
+### Prompt Engineering for Mortgage Broker Quality Assurance
+*HumanFirst*
+
+Designed prompts for AI-powered analysis of sales follow-up calls, enabling automated assessment of process adherence across 20 agents. Built evaluation framework for objective measurement of agent compliance with sales protocols.
+
+---
+
+### RAG System Evaluation — Canadian Telecommunications Company
+*HumanFirst*
+
+Evaluated RAG solutions (LangChain, Dialogflow CX, Stack AI, OpenAI GPTs) for contact centre agent support. Developed evaluation framework measuring accuracy, hallucination rates, implementation complexity, and cost. Delivered strategic recommendations and implementation roadmap.
+
+---
+
+### Sales Objection Analysis — Latin American Call Centre
+*HumanFirst*
+
+Analysed 20,000+ conversations to identify and classify sales objections using generative AI. Delivered classification model and prompt engineering methodology within one week.
+
+---
+
+### Strategic Competitor Analysis — Online Marketplace
+*HumanFirst*
+
+Analysed 20,000+ customer reviews across 4 competitors over 12 months using GPT-4-mini. Constructed hierarchical taxonomy; developed interactive Plotly visualisations to identify strategic opportunities.
+
+---
+
+### Low-Code AI Integration and Automation
+*HumanFirst*
+
+Leveraged Zapier, Make.com, Power Platform, and n8n to build AI-powered business process automations. Delivered: content repurposing pipeline (video → blog/social), intelligent email triage, and automated action item extraction from meeting transcripts.
+
+
+**Cover Letter Snippets:**
+Snippet on developing workflows and priotising
+I build things and I solve problems, especially when the playbook doesn't exist yet.
+Last year, our startup pivoted hard: from 24 people serving enterprise clients to 8 people building a product for small businesses and end users. Overnight, our sales team was gone. Our Director of Customer Success was gone. What remained was a portfolio of enterprise clients who still needed support and a completely new market we hadn't touched.
+So I figured it out. I redistributed our enterprise accounts with my one remaining colleague and used n8n and Claude to automate or streamline support wherever possible, keeping clients covered without the headcount. Then I built the outbound engine from scratch: n8n workflows and APIs to identify, filter, and reach prospects on LinkedIn, data analysis agents to monitor progress and run A/B tests on messaging, and a demo pipeline that routed high-value partnership opportunities to our CEO and Chief of Staff. I became the entire go-to-market function, booking 20 product demos and user interviews a week and running them myself, pulling in leadership when partnership potential warranted it. I then built agents to process the weekly transcriptions and synthesize them into insight reports, turning 10+ hours of conversations into actionable product and market intelligence for the team.
+
+Snippet on why my background is relevant
+
+Before AI agents became the current framing, there were chatbots. First simple button-based workflows, then intent-driven systems connected to APIs through tools like Dialogflow and IBM Watson. I’ve worked through that entire progression.
+
+I was building workflows before tools like Zapier or n8n existed, thinking in classifications before prompting became a discipline, and using early models like Davinci to shape tone before that was standard practice. A large part of my experience has come from working directly with real interactions—reading thousands of conversation transcripts to understand where systems break, and why.
+
+That includes debugging issues that only show up in production, like voice bots consistently failing on something as simple as a zip code, or understanding how language varies across different user groups and how that impacts system behavior. I’ve also spent a lot of time translating concepts like semantic similarity and embeddings to non-technical stakeholders, helping teams align on what these systems are actually doing.
+
+That background has shaped how I approach AI. I don’t see these systems as something you “build and deploy” and then expect to adapt on their own. They are non-deterministic systems that require deliberate design, constraint, and ongoing oversight. Much of the current wave of AI development is overly focused on the technology itself, with the assumption that capability will translate directly into value. In practice, that rarely holds without careful shaping and iteration.
+
+What that experience has given me is a clear view of what modern AI systems really are: non-deterministic components that need to be guided, constrained, and monitored to behave reliably. AI agents are a continuation of that same challenge, not a completely new one, and my background is grounded in making those systems work in practice.
+
+
+I’ve also worked directly with modern agent frameworks, including building systems in LangGraph, so I’m familiar with how these systems are implemented in practice. What that has reinforced for me is that while tooling and code define the structure, they don’t determine the outcome. Agentic systems are inherently non-deterministic, and their reliability depends on how their behavior is shaped—through constraints, evaluation, and iteration. My background in designing and debugging conversational systems directly addresses that layer, which is as critical to agent performance as the underlying implementation.
+
+
+My experience includes building agent workflows using LangGraph, which has given me a practical understanding of how orchestration layers are implemented. However, the limiting factor in these systems is rarely the graph structure itself. Performance is determined by how well the system handles ambiguity, edge cases, and variation in user input. My background in conversational AI—particularly in analyzing real interaction data and diagnosing system failures—directly applies to this layer. It complements technical implementation, but more importantly, it addresses a constraint that is equally critical to system reliability.
+
+
+I’ve built systems using LangGraph and similar frameworks, so I’m comfortable with the implementation side of agentic architectures. What I’ve consistently seen is that the difficulty is not in wiring the system together, but in making it behave correctly once deployed. These systems do not become reliable simply because they are well-structured in code. They require deliberate shaping, evaluation, and iteration based on real user behavior. That is the focus of my experience, and it is as essential to building effective agents as the technical stack itself.
+
+
+# COVER LETTER TO CHECK
+
+<planning>
+archetype: Agentic/Automation
+project_1: Dialogflow Migration — 100k-voice-bot, F1 50→96 %, proves I can hit containment & resolution KPIs
+project_2: vid2doc — LLM-as-judge eval with auto-regen, shows I ship eval frameworks that catch errors before UI
+hook: After reducing a voice bot’s mis-routes from 12 % to 4 % with a four-line guardrail tweak, I know how a single prompt can swing Velo’s containment rate.
+angle: Treated LLMs as production systems years before “agentic” became buzz-word: build, measure, iterate, defend KPI.
+</planming>
+
+Dear Hiring Manager,
+
+After reducing a voice bot’s mis-routes from 12 % to 4 % with a four-line guardrail tweak, I know how a single prompt can swing Velo’s containment rate. I’m applying for the Conversational AI & Prompt Engineer role to turn those small, measurable moves into compounding wins for ZenBusiness founders.
+
+Last year I migrated a 100 k-contact/month voice bot from Dialogflow ES to CX. By clustering two million utterances in HumanFirst I collapsed 950 intents into 200 and lifted F1 from <50 % to 96 %. The new entity-first design raised confident coverage to 65 %, cutting live-agent escalations within four weeks. I track the same metrics you called out—resolution, containment, latency—because I’ve seen them move when evaluation is wired into CI.
+
+I used the same discipline for vid2doc, a side project that converts screen-recordings into docs. An LLM-as-judge scores each draft 1–10; anything under 8 triggers an automatic regeneration loop. Parallel testing on five real transcripts caught flow errors before the React frontend existed and saved an estimated 18 dev hours. Prompts live in HumanFirst, so the eval rubric ships with the feature and updates without code.
+
+I keep building these loops because I’m hooked on the moment an ambiguous instruction surfaces in a trace and you realise the model isn’t wrong—it’s unbounded. Velo’s users will bring edge cases every hour; I want to be the one writing the guardrails that turn them into clean resolutions.
+
+I bring the toolkit that moves LLMs from interesting to reliable—measure, edit, ship, repeat. Let’s put it to work for the next founder trying to start a business at 2 a.m.
+
+Oliver Day
+
+# TASK
+
+Go through the letter sentence by sentence. For every specific claim — a number, metric, technology, project name, company name, result, or role description — find where it appears in the source materials.
+
+Output a list of flags in this exact format, one per line:
+
+UNSOURCED: "<exact quote from letter>" — not found in source materials
+SOURCED: "<exact quote from letter>" — found in [CV / Project Evidence / Snippets]
+
+Only flag specific factual claims (numbers, names, results, technologies). Do not flag general statements of intent or opinion.
+If everything checks out, output: ALL SOURCED

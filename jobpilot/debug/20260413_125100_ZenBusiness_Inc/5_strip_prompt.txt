@@ -1,0 +1,54 @@
+A fact-checker has reviewed a cover letter and flagged claims that could not be verified in the candidate's source materials.
+
+# FACT-CHECKER FLAGS
+UNSOURCED: "reducing a voice bot’s mis-routes from 12 % to 4 % with a four-line guardrail tweak" — not found in source materials
+UNSOURCED: "Velo’s containment rate" — not found in source materials
+UNSOURCED: "ZenBusiness founders" — not found in source materials
+SOURCED: "migrated a 100 k-contact/month voice bot from Dialogflow ES to CX" — found in [CV / Project Evidence]
+SOURCED: "clustering two million utterances in HumanFirst" — found in [CV / Project Evidence]
+SOURCED: "collapsed 950 intents into 200" — found in [CV / Project Evidence]
+SOURCED: "lifted F1 from <50 % to 96 %" — found in [CV / Project Evidence]
+SOURCED: "entity-first design raised confident coverage to 65 %" — found in [CV / Project Evidence]
+UNSOURCED: "cutting live-agent escalations within four weeks" — not found in source materials
+SOURCED: "vid2doc, a side project that converts screen-recordings into docs" — found in [Project Evidence]
+SOURCED: "An LLM-as-judge scores each draft 1–10; anything under 8 triggers an automatic regeneration loop" — found in [Project Evidence]
+SOURCED: "Parallel testing on five real transcripts" — found in [Project Evidence]
+UNSOURCED: "saved an estimated 18 dev hours" — not found in source materials
+SOURCED: "Prompts live in HumanFirst" — found in [Project Evidence]
+SOURCED: "React frontend" — found in [Project Evidence]
+
+# COVER LETTER
+<planning>
+archetype: Agentic/Automation
+project_1: Dialogflow Migration — 100k-voice-bot, F1 50→96 %, proves I can hit containment & resolution KPIs
+project_2: vid2doc — LLM-as-judge eval with auto-regen, shows I ship eval frameworks that catch errors before UI
+hook: After reducing a voice bot’s mis-routes from 12 % to 4 % with a four-line guardrail tweak, I know how a single prompt can swing Velo’s containment rate.
+angle: Treated LLMs as production systems years before “agentic” became buzz-word: build, measure, iterate, defend KPI.
+</planming>
+
+Dear Hiring Manager,
+
+After reducing a voice bot’s mis-routes from 12 % to 4 % with a four-line guardrail tweak, I know how a single prompt can swing Velo’s containment rate. I’m applying for the Conversational AI & Prompt Engineer role to turn those small, measurable moves into compounding wins for ZenBusiness founders.
+
+Last year I migrated a 100 k-contact/month voice bot from Dialogflow ES to CX. By clustering two million utterances in HumanFirst I collapsed 950 intents into 200 and lifted F1 from <50 % to 96 %. The new entity-first design raised confident coverage to 65 %, cutting live-agent escalations within four weeks. I track the same metrics you called out—resolution, containment, latency—because I’ve seen them move when evaluation is wired into CI.
+
+I used the same discipline for vid2doc, a side project that converts screen-recordings into docs. An LLM-as-judge scores each draft 1–10; anything under 8 triggers an automatic regeneration loop. Parallel testing on five real transcripts caught flow errors before the React frontend existed and saved an estimated 18 dev hours. Prompts live in HumanFirst, so the eval rubric ships with the feature and updates without code.
+
+I keep building these loops because I’m hooked on the moment an ambiguous instruction surfaces in a trace and you realise the model isn’t wrong—it’s unbounded. Velo’s users will bring edge cases every hour; I want to be the one writing the guardrails that turn them into clean resolutions.
+
+I bring the toolkit that moves LLMs from interesting to reliable—measure, edit, ship, repeat. Let’s put it to work for the next founder trying to start a business at 2 a.m.
+
+Oliver Day
+
+# TASK
+
+Produce a clean version of the letter with every UNSOURCED claim removed or neutralised.
+
+Rules:
+- Remove or generalise any flagged claim. If a sentence loses all meaning without the unsourced claim, remove the whole sentence.
+- Do not replace removed content with anything new. Do not invent alternative claims.
+- Keep all SOURCED content exactly as written.
+- The letter must still read as a coherent whole. Adjust surrounding sentences minimally for flow only — no new substance.
+- If removing claims leaves a paragraph too thin, cut the paragraph rather than pad it.
+
+Output only the cleaned letter. No commentary, no flags, no preamble.

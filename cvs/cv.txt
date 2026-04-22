@@ -1,0 +1,61 @@
+OLIVER DAY
+oliver.p.day@gmail.com | +381 603388856 | www.linkedin.com/in/dayoliver
+Kosancicev Venac 6, Belgrade, Serbia
+
+EXPERIENCE
+November 2023 - Present 
+Conversational AI Developer, HumanFirst
+•	Partner with enterprise clients to design, build, and deploy conversational AI solutions on Dialogflow, Kore.AI and Microsoft Copilot using the HumanFirst platform, translating complex business requirements into technical implementations.
+•	Lead end-to-end AI Assistant development from concept to production, including conversation design, NLU optimization, and incorporating generative AI into enterprise-level applications.
+•	Develop proof of concepts and production use cases for generative AI, focusing on chatbots, contact center analysis, and customer experience enhancements.
+•	Architect and implement advanced prompt engineering pipelines for enterprise clients including an international mortgage brokerage (BigQuery/Looker integration) and global insurance firm, managing prompt orchestration, evaluation frameworks, and performance optimization.
+•	Using n8n, Langgraph and Claude Code, design and develop complex LLM-powered automation workflows to create scalable outreach systems that generate 20+ qualified demo calls weekly through LLM-powered lead qualification and personalized engagement strategies.
+•	Prototype AI-native applications using modern development platforms (Lovable, Orchid), creating proof-of-concept applications with integrated LLM workflows that demonstrate practical AI implementation for business use cases.
+•	Design and implement workflows for prompt engineering, including evaluating workflows, developing RAG solutions and optimizing prompt performance for various use cases.
+•	Developed enterprise AI training programs on prompt engineering and conversational AI best practices, enabling customer teams to scale AI adoption across diverse business functions and use cases.
+
+October 2021 - October 2023
+Conversation Engineer, Conversation Design Institute Services
+•	Consulting on conversational AI strategy, implementation, and NLU optimization for enterprises. 
+•	Led the NLU optimization of chatbots for a variety of clients in the financial and pharmaceutical sectors.
+•	Implemented conversation flows into various conversational AI platforms, integrating API calls and making use of platform features and logic to design complex conversational experiences.
+•	Designing and delivering workshops for clients on AI training and large language models.
+•	Designed and delivered a consulting product to match conversational AI platforms to clients based on their needs. 
+•	Led the research and development of CDI Services consulting offerings for large language models. 
+EXPERIENCE (continued)
+
+July 2021 - April 2023
+Conversation Designer, Travtus
+
+September 2019 - June 2021
+Customer Service Improvement Manager, Avast
+
+September 2016 - September 2019
+Customer Support Manager, Avast
+•	Managed the continued growth of the Belgrade customer support center including re-shoring work from Avast’s outsourcing partners.
+September 2012 - September 2016
+Head of Customer Support, Privax
+•	Established the Privax customer support center in Belgrade, growing the team from 6 to 40 employees and leading the team through subsequent acquisitions by AVG and Avast.
+
+
+
+EDUCATION
+
+Knox College, Galesburg, Illinois
+2005: Bachelor of Arts in Political Science and Biology
+
+London School of Commerce, Belgrade, Serbia
+2013: MBA with Distinction
+
+
+
+KEY SKILLS
+ 
+Prompt Design and Engineering
+RAG solutions
+Conversational AI solution design
+Journey Mapping
+Introductory Knowledge of Python
+Conversational AI and chatbots
+ 
+

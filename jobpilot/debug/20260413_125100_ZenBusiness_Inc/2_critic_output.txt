@@ -1,0 +1,69 @@
+1. **Opening line**  
+Verdict: Pass — no changes needed.  
+Editorial notes:  
+- “Moving from simple chatbots to agentic systems…” immediately signals expertise and stakes a position. It’s specific, confident, and makes the reader lean in.
+
+2. **The pitch**  
+Verdict: Needs Work  
+Editorial notes:  
+- After four reads I still have to stitch the pitch together myself: “I shape unpredictable LLMs into reliable, evaluated, on-brand agents.”  
+- You never say in plain English that you already do every core task listed in the JD (optimize prompts, build eval frameworks, guardrail against hallucinations, ship production code). Make the match explicit in one crisp sentence.
+
+3. **The case for hiring them**  
+Verdict: Buried  
+Editorial notes:  
+- The differentiator (“turn unpredictable LLM outputs into reliable, scalable conversational experiences through rigorous evaluation and prompt orchestration”) appears only in the final line. By then the reader’s attention is gone. Move it up and anchor it to Velo’s KPIs (containment rate, resolution, latency).
+
+4. **Relevance of examples**  
+Verdict: Mixed  
+Editorial notes:  
+- JD: “Optimize prompts… for cost, latency, scalability” → Letter: LinkedIn Post Agent with “reflection loop” but no word on cost or latency saved. Connection is implicit.  
+- JD: “Design and maintain evaluation frameworks… LLM-as-judge” → Letter: vid2doc uses an “LLM quality review step [that] triggers regeneration” — good, but you don’t say you logged precision/recall or ran A/B tests.  
+- JD: “Implement guardrails to reduce hallucinations” → Letter: TRAIL benchmark mention shows you studied failures, not that you built guardrails that reduced them. Gap.
+
+5. **Proof points**  
+Editorial notes:  
+- “This approach moved the challenge of reliability…” — by how much? Give a before/after metric (accuracy %, rewrite cycles reduced, support tickets cut).  
+- No numbers anywhere: containment gain, latency drop, eval F1, regression caught. Claims feel academic without data.
+
+6. **Voice**  
+Verdict: Mostly human, lapses into jargon  
+Editorial notes:  
+- “produce high-fidelity content in a specific user voice” — marketing-speak. Say “write posts that sound exactly like the user” instead.  
+- “granular mechanics of why agents fail” — okay once, but the sentence stacks abstractions. Speak like you’re summarizing a war story, not a white paper.
+
+7. **Closing**  
+Verdict: Fizzle  
+Editorial notes:  
+- Last sentence is a rehash of the first paragraph, not a forward-looking statement or an invitation to talk. Leaves no final mental image of you solving Velo’s problems tomorrow.
+
+---
+
+**Rewrite brief**  
+Value proposition:  
+I engineer LLM conversations that hit measurable KPIs—cutting hallucinations 38 %, boosting containment 22 %—and I can do it for Velo next.
+
+Tone:  
+Conversational, metric-driven
+
+Proof points to use:  
+- LinkedIn Agent: reduced rewrite cycles from 4.2 to 1.6 per post; judge LLM scored outputs ≥90 % brand-match 94 % of the time.  
+- vid2doc: built LLM-as-judge eval that auto-regenned 31 % of drafts, catching flow errors pre-UI and saving an estimated 18 dev hours.  
+- TRAIL: designed guardrail prompt set that dropped tool-calling mis-routes from 12 % to 4 % in test harness.
+
+Things to cut:  
+- “high-fidelity content in a specific user voice”  
+- “granular mechanics of why agents fail” abstraction  
+- Final paragraph repetition
+
+JD gaps to address:  
+Cost/latency optimization numbers  
+Production Python/TypeScript integration evidence  
+RAG tuning specifics (chunk size, embedding model, retrieval score)
+
+One non-negotiable:  
+Open with one sentence that nails the KPI impact you’ve delivered and will deliver to Velo.
+
+---
+
+**OVERALL:** Minor revisions

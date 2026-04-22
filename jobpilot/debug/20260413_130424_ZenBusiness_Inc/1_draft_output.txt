@@ -1,0 +1,19 @@
+<planning>
+archetype: Agentic/Automation
+project_1: LinkedIn Post Agent — demonstrates agentic orchestration (LangGraph), prompt-first development, and rigorous evaluation (GEPA/LLM-as-judge) which directly maps to Velo's needs.
+project_2: Dialogflow Platform Migration — proves ability to handle massive scale (2M utterances), optimize NLU/intent architecture, and drive measurable accuracy (F1 from 50% to 96%).
+hook: Designing conversational AI is a struggle against non-determinism, where a system's value is determined by how it handles ambiguity rather than how well it is coded. I am applying for the Conversational AI & Prompt Engineer role at ZenBusiness to help Velo navigate this complexity.
+angle: Frame Oliver as a practitioner who views AI not as a "build and deploy" task, but as a continuous cycle of constraint, evaluation, and iterative shaping to ensure reliability.
+</planning>
+
+Dear Hiring Manager,
+
+Designing conversational AI is a struggle against non-determinism, where a system's value is determined by how it handles ambiguity rather than how well it is coded. I am applying for the Conversational AI & Prompt Engineer role at ZenBusiness to help Velo navigate this complexity.
+
+I recently built a LinkedIn Post Agent using a LangGraph pipeline to manage multi-step reasoning and conditional rewrites. By utilizing HumanFirst for all prompt orchestration and model routing, I moved the logic out of the code and into a dedicated testing environment, allowing me to catch inconsistent JSON outputs and syntax failures before the pipeline ever went live. For a high-volume voice bot migration, I analyzed 2 million customer utterances to rebuild an NLU architecture that reduced 950 intents down to under 200. This systematic optimization improved the F1 score from below 50% to 96%, ensuring the system could handle natural language variation at scale.
+
+My fascination with this work comes from the friction between model capability and real-world reliability. While building vid2doc, I realized that even with advanced LLMs, a pipeline can fail simply because the model cannot reason about stable UI states for screenshots. This taught me that reliability isn't about the underlying model alone; it is about building rigorous evaluation frameworks and guardrails that account for these specific, messy failure modes.
+
+I bring a deep understanding of how to move AI from a successful prototype to a reliable production tool through continuous evaluation and iterative prompting. I want to apply this approach to ensure Velo provides the clear, trustworthy guidance entrepreneurs need to grow their businesses.
+
+Oliver Day

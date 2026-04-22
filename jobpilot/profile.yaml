@@ -1,0 +1,571 @@
+name: "Oliver Day"
+email: "oliver.p.day@gmail.com"
+phone: "+381 603388856"
+linkedin: "https://www.linkedin.com/in/dayoliver"
+location: "Belgrade, Serbia"
+
+positioning: >
+  I build production-grade agentic systems — evaluation frameworks, LLM pipelines,
+  and multi-agent workflows — with a background shipping these in customer-facing
+  environments at scale. I work best at the point where a team has moved past the
+  POC and needs someone who can make it reliable, observable, and actually improve
+  over time.
+
+# ── Target Roles ────────────────────────────────────────────────────────────
+target_roles:
+  - "AI Engineer"
+  - "Senior AI Engineer"
+  - "Conversational AI Engineer"
+  - "AI Reliability Engineer"
+  - "LLM Platform Engineer"
+  - "Agentic Systems Engineer"
+  - "Head of AI"
+  - "AI Solutions Architect"
+  - "Generative AI Consultant"
+  - "Applied ML Engineer"
+  - "LLM Engineer"
+  - "AI consultant"
+  - "Solutions Engineer"
+  - "AI Solutions Engineer"
+  - "Forward Deployed Engineer"
+  - "AI Enablement Lead"
+  - "AI Enablement Manager"
+  - "CX AI Professional Services"
+  - "AI Transformation Lead"
+  - "CX AI Transformation"
+  - "Conversational AI Product Manager"
+  - "CX AI Product Manager"
+
+fallback_roles:
+  - "Conversation Designer"
+  - "AI Consultant"
+
+# ── Salary ──────────────────────────────────────────────────────────────────
+salary:
+  uk_gbp_min: 90000
+  serbia_eur_monthly_min: 5500   # consultant / lump sum taxation
+
+# ── Geography ───────────────────────────────────────────────────────────────
+preferred_locations:
+  - London
+  - Cambridge
+  - Norwich
+  - Edinburgh
+  - remote
+  - Spain
+  - Scandinavia
+  - Slovenia
+  - Serbia
+  - Italy
+
+# ── CV Variants ─────────────────────────────────────────────────────────────
+# cv_draft is the fallback — used when no other variant scores above its threshold.
+# All other variants are scored by keyword hits; highest scorer above threshold wins.
+# strong_keywords count double. threshold defaults to healthtech_threshold if not set.
+# Override is always available on the Job Detail page.
+
+cv_variants:
+  cv_agentic:
+    path: "../cvs/cv_agentic.md"
+    display_name: "Agentic / LLM Engineering"
+    threshold: 2
+    keywords:
+      - agentic
+      - multi-agent
+      - LangGraph
+      - LangChain
+      - agent framework
+      - workflow orchestration
+      - pipeline architecture
+      - LLM pipeline
+      - workflow automation
+      - agent orchestration
+      - task orchestration
+      - autonomous agent
+      - n8n
+      - agent development
+    strong_keywords:
+      - LangGraph
+      - multi-agent
+      - agentic
+
+  cv_cx:
+    path: "../cvs/cv_cx.md"
+    display_name: "Conversational AI / CX"
+    threshold: 2
+    keywords:
+      - conversational AI
+      - contact centre
+      - contact center
+      - NLU
+      - chatbot
+      - virtual agent
+      - IVR
+      - customer service AI
+      - dialogue management
+      - Dialogflow
+      - Kore.AI
+      - voice AI
+      - voice bot
+      - customer experience
+      - CX transformation
+      - conversation design
+      - intent classification
+      - Nuance
+      - Amazon Lex
+      - Rasa
+    strong_keywords:
+      - contact centre
+      - contact center
+      - NLU
+      - conversational AI
+
+  cv_consulting:
+    path: "../cvs/cv_consulting.md"
+    display_name: "AI Consulting / Solutions Architect"
+    threshold: 2
+    keywords:
+      - consultant
+      - consulting
+      - advisory
+      - solutions architect
+      - solutions engineer
+      - fractional
+      - AI enablement
+      - enablement
+      - AI strategy
+      - client delivery
+      - professional services
+      - engagement
+      - AI adoption
+      - digital transformation
+      - AI transformation
+      - go to market
+      - pre-sales
+      - technical sales
+      - forward deployed
+      - customer success
+      - technical account
+    strong_keywords:
+      - fractional
+      - solutions architect
+      - solutions engineer
+      - AI enablement
+      - forward deployed
+
+# Default threshold used if a variant doesn't specify its own
+cv_threshold: 2
+
+# ── Context Files ────────────────────────────────────────────────────────────
+context:
+  projects_md: "../context/projects.md"
+  coverletter_snippets_md: "../context/coverletter_snippets.md"
+
+# ── Scoring ──────────────────────────────────────────────────────────────────
+scoring:
+  base_score: 5.0
+
+  # LLM scoring: runs Claude Haiku on jobs that pass the keyword threshold.
+  # Keyword score is replaced by the LLM score for those jobs.
+  # Set llm_enabled: false to disable without removing config.
+  llm_enabled: true
+  llm_threshold: 5.0    # keyword score must be >= this to trigger LLM scoring
+  llm_model: "google/gemma-4-26b-a4b-it"
+  generation_model: "moonshotai/kimi-k2.5"
+  critic_model: "moonshotai/kimi-k2"
+  rewrite_model: "anthropic/claude-sonnet-4.6"
+  # Alternatives: "google/gemma-4-31b-it", "claude-haiku-4-5-20251001", "claude-sonnet-4-6", "deepseek/deepseek-v3.2"
+
+  positive_signals:
+    - {text: "LangGraph",          weight: 0.8}
+    - {text: "LangChain",          weight: 0.5}
+    - {text: "LangSmith",          weight: 0.7}
+    - {text: "agentic",            weight: 0.8}
+    - {text: "multi-agent",        weight: 0.7}
+    - {text: "agent",              weight: 0.5}
+    - {text: "evaluation",         weight: 0.7}
+    - {text: "observability",      weight: 0.5}
+    - {text: "tracing",            weight: 0.5}
+    - {text: "production",         weight: 0.3}
+    - {text: "conversational AI",  weight: 0.9}
+    - {text: "voice AI",           weight: 0.6}
+    - {text: "NLU",                weight: 0.5}
+    - {text: "Claude",             weight: 0.6}
+    - {text: "Anthropic",          weight: 0.6}
+    - {text: "OpenAI",             weight: 0.3}
+    - {text: "n8n",                weight: 1.0}
+    - {text: "LLM pipeline",       weight: 0.7}
+    - {text: "RAG",                weight: 0.4}
+    - {text: "ai workflow",         weight: 0.5}
+    - {text: "remote",             weight: 1.0}
+    - {text: "Python",             weight: 0.3}
+    - {text: "prompt optimization", weight: 0.8}
+    - {text: "solutions engineer",  weight: 0.9}
+    - {text: "AI enablement",       weight: 0.8}
+    - {text: "forward deployed",    weight: 1.0}
+    - {text: "customer success",    weight: 0.4}
+    - {text: "pre-sales",           weight: 0.5}
+    - {text: "presales",            weight: 0.5}
+    - {text: "PyTorch",            weight: -0.5}
+    - {text: "Python expert",      weight: -0.4}
+    - {text: "TypeScript",         weight: -0.4}
+    - {text: "fine-tune",          weight: -0.5}
+    - {text: "fine tuning",        weight: -0.5}
+    - {text: "automation",        weight: 0.5}
+
+  # Disqualify if any of these appear in the job TITLE (case-insensitive, no weight needed)
+  title_red_flags:
+    - "data scientist"
+    - "machine learning"
+    - "junior"
+    - "full stack"
+    - "fullstack"
+    - "data engineer"
+    - "ml"
+    - "python developer"
+    - "senior developer"
+    - "security engineer"
+    - "data architect"
+    - "devops"
+    - "graduate"
+    - "ios"
+    - "machine learning"
+    - "intern"
+    - "research"
+    - "researcher"
+    - "founding"
+    - "full-stack"
+    - "site reliability"
+    - "ux designer"
+    - "android developer"
+    - "sas engineer"
+    - "backend"
+    - "frontend"
+    - "infrastructure"
+    - "ai trainer"
+    - "AI Content Specialist"
+    - "qa automation"
+    - "software"
+    - "architect"
+
+  # Penalise score if these appear in the JD TEXT (subtracts weight from score)
+  jd_red_flags:
+    - {text: "pure research",                    weight: 1.2}
+    - {text: "PhD required",                     weight: 2.0}
+    - {text: "PhD preferred",                    weight: 1.0}
+    - {text: "Java",                             weight: 0.5}
+    - {text: "C++",                              weight: 0.5}
+    - {text: "Rust",                             weight: 0.3}
+    # Software-engineering-heavy signals
+    - {text: "software engineering experience",  weight: 1.5}
+    - {text: "years of software engineering",    weight: 1.5}
+    - {text: "strong software engineer",         weight: 1.5}
+    - {text: "backend engineer",                 weight: 1.5}
+    - {text: "backend development",              weight: 1.0}
+    - {text: "full-stack",                       weight: 0.8}
+    - {text: "full stack",                       weight: 0.8}
+    - {text: "data structures and algorithms",   weight: 1.0}
+    - {text: "computer science fundamentals",    weight: 0.8}
+    - {text: "system design",                    weight: 0.5}
+    - {text: "microservices",                    weight: 0.5}
+
+# ── Discovery ────────────────────────────────────────────────────────────────
+discovery:
+  # Each phrase is searched separately — one discovery run per keyword
+  keyword_searches:
+    - "chatbot"
+    - "ai consultant"
+    - "ai solutions"
+    - "conversational AI"
+    - "generative AI"
+    - "forward deployed engineer"
+    - "solutions engineer AI"
+    - "AI enablement"
+    - "AI professional services"
+    - "AI transformation" 
+    - "ai customer experience"
+    - "AI product manager"
+    - "ai customer experience"
+    - "agentic"
+    - "conversational"
+
+  default_days_old: 7
+
+  # Positive title filter applied to all location-aware sources globally.
+  # Jobs whose title contains NONE of these terms are rejected at fetch time.
+  title_positive_filter:
+    - "AI"
+    - "LLM"
+    - "agentic"
+    - "conversational"
+    - "generative"
+    - "NLP"
+    - "NLU"
+    - "evaluation"
+    - "agent"
+    - "artificial intelligence"
+    - "solutions engineer"
+    - "solutions architect"
+    - "enablement"
+    - "forward deployed"
+    - "forward deployment"
+    - "GenAI"
+    - "customer success"
+    - "automation"
+    - "automations"
+
+  # Locations looped over by the runner for sources with uses_location: true
+  # Each entry: location (string) + optional title_filter (list) + optional remote (bool)
+  # title_filter: only keep jobs where title contains at least one of the listed words (case-insensitive)
+  search_locations:
+    - location: "London, UK"
+    - location: "Edinburgh, UK"
+    - location: "Cambridge, UK"
+    - location: "Norwich, UK"
+    - location: "Valencia, Spain"
+      title_filter: ["AI", "LLM", "generative", "agentic"]
+      ascii_only: true
+    - location: "Madrid, Spain"
+      title_filter: ["AI", "LLM", "generative", "agentic"]
+      ascii_only: true
+    - location: "United Kingdom"
+      remote: true
+    - location: "Europe"
+      remote: true
+    - location: "Belgrade, Serbia"
+      title_filter: ["AI", "LLM", "generative", "agentic"]
+      ascii_only: true
+
+  # Countries for Adzuna multi-country search (uses ISO country codes)
+  # Multiple entries per country code = one search per city
+  target_countries:
+    - {code: gb, location: "London"}
+    - {code: gb, location: "Edinburgh"}
+    - {code: gb, location: "Cambridge"}
+    - {code: gb, location: "Norwich"}
+    - {code: es, location: "Valencia"}
+    - {code: es, location: "Madrid"}
+    - {code: it, location: "Milan"}
+    - {code: se, location: "Stockholm"}
+
+  # Sources registry — edit here to add, remove, or disable sources.
+  # To add a new source:
+  #   1. Add an entry below with enabled: true
+  #   2. Drop discovery/{module}_source.py implementing fetch(keywords, location, days, config) -> list[dict]
+  # To disable a source: set enabled: false
+  sources:
+    - slug: linkedin
+      module: linkedin_source
+      display: "LinkedIn"
+      enabled: true
+      requires_key: false
+      uses_location: true
+      days_old: 7
+      results_wanted: 150
+
+    - slug: indeed
+      module: jobspy_source
+      display: "Indeed"
+      enabled: true
+      requires_key: false
+      uses_location: true
+      jobspy_site: indeed
+
+    - slug: glassdoor
+      module: jobspy_source
+      display: "Glassdoor"
+      enabled: false
+      requires_key: false
+      uses_location: true
+      jobspy_site: glassdoor
+
+    - slug: google
+      module: jobspy_source
+      display: "Google Jobs"
+      enabled: true
+      requires_key: false
+      uses_location: true
+      jobspy_site: google
+
+    - slug: adzuna
+      module: adzuna_source
+      display: "Adzuna (multi-country)"
+      enabled: true
+      requires_key: true   # ADZUNA_APP_ID + ADZUNA_API_KEY in .env
+      uses_location: false  # loops over target_countries internally
+
+    - slug: reed
+      module: reed_source
+      display: "Reed.co.uk"
+      enabled: true
+      requires_key: true   # REED_API_KEY in .env
+      uses_location: true
+
+    - slug: hn
+      module: hn_source
+      display: "HN Who is Hiring"
+      enabled: false
+      requires_key: false
+      uses_location: false
+
+    - slug: remotive
+      module: remotive_source
+      display: "Remotive (remote)"
+      enabled: true
+      requires_key: false
+      uses_location: false
+
+    - slug: remoteok
+      module: remoteok_source
+      display: "RemoteOK"
+      enabled: true
+      requires_key: false
+      uses_location: false
+
+    - slug: workingnomads
+      module: workingnomads_source
+      display: "Working Nomads"
+      enabled: true
+      requires_key: false
+      uses_location: false
+      days_old: 30   # low-volume source — widen window to capture all current listings
+
+    - slug: weworkremotely
+      module: weworkremotely_source
+      display: "We Work Remotely"
+      enabled: true
+      requires_key: false
+      uses_location: false
+
+    - slug: greenhouse
+      module: greenhouse_source
+      display: "Watched Companies"
+      enabled: false
+      requires_key: false
+      uses_location: false
+
+    - slug: cvlibrary
+      module: cvlibrary_source
+      display: "CV Library (UK)"
+      enabled: false   # 403 Forbidden — blocked by bot protection
+      requires_key: false
+      uses_location: true
+
+    - slug: jobbland
+      module: jobbland_source
+      display: "Jobbland (Sweden)"
+      enabled: false   # JS-rendered — static scraper returns nothing; needs Playwright
+      requires_key: false
+      uses_location: false  # Sweden only
+
+    - slug: aijobs
+      module: aijobs_source
+      display: "AI Jobs (aijobs.ai)"
+      enabled: false   # API endpoint returning HTML — needs investigation
+      requires_key: false
+      uses_location: false
+
+    - slug: himalayas
+      module: himalayas_source
+      display: "Himalayas (remote)"
+      enabled: true
+      requires_key: false
+      uses_location: false
+
+    - slug: jobicy
+      module: jobicy_source
+      display: "Jobicy (remote)"
+      enabled: true
+      requires_key: false
+      uses_location: false
+
+    - slug: arbeitnow
+      module: arbeitnow_source
+      display: "Arbeitnow (EU remote)"
+      enabled: true
+      requires_key: false
+      uses_location: false
+
+    - slug: therundown
+      module: therundown_source
+      display: "The Rundown AI Jobs"
+      enabled: true
+      requires_key: false
+      uses_location: false
+
+    - slug: euremotejobs
+      module: euremotejobs_source
+      display: "EuRemoteJobs"
+      enabled: true
+      requires_key: false
+      uses_location: false  # EU remote — curl_cffi bypasses Cloudflare
+
+    - slug: foorilla
+      module: foorilla_source
+      display: "Foorilla"
+      enabled: false        # requires FOORILLA_API_KEY in .env
+      requires_key: true
+      uses_location: false  # topic-based: AI, NLP, RPA, Autonomous Systems, Workflow Automation
+
+    - slug: remoterocketship
+      module: remoterocketship_source
+      display: "Remote Rocketship"
+      enabled: false   # 403 Forbidden — Cloudflare block at IP/ASN level
+      requires_key: false
+      uses_location: false
+
+    - slug: trueup
+      module: trueup_source
+      display: "TrueUp AI Jobs"
+      enabled: false    # 403 on fetch — verify access before enabling
+      requires_key: false
+      uses_location: false
+
+    - slug: startupjobs
+      module: startupjobs_source
+      display: "startup.jobs"
+      enabled: true
+      requires_key: false
+      uses_location: false  # category-based: /ai-jobs, /machine-learning-jobs, /llm-jobs, /nlp-jobs
+
+    - slug: aijobster
+      module: aijobster_source
+      display: "AIJobster"
+      enabled: true
+      requires_key: false
+      uses_location: false  # AI-focused board, keyword-filtered client-side
+
+    - slug: google_cse
+      module: google_cse_source
+      display: "Google Search (Serper)"
+      enabled: false        # requires SERPER_API_KEY in .env — sign up free at serper.dev
+      requires_key: true
+      uses_location: false
+      fetch_jd: false       # set true to fetch full JD text (10 extra HTTP requests per run)
+      # extra_query: "site:greenhouse.io OR site:lever.co OR site:ashby.hq.com"
+
+    # Add new sources below. Example (disabled until module is built):
+    # - slug: wellfound
+    #   module: wellfound_source
+    #   display: "Wellfound"
+    #   enabled: false
+    #   requires_key: false
+
+    # - slug: joberty
+    #   module: joberty_source
+    #   display: "Joberty (Serbia)"
+    #   enabled: false
+    #   requires_key: false
+
+# ── Watched Companies (Greenhouse / Lever / Ashby) ───────────────────────────
+# ats: greenhouse | lever | ashby
+watched_companies:
+  - {name: "Anthropic",  slug: "anthropic",  ats: greenhouse}
+  - {name: "Cohere",     slug: "cohere",     ats: greenhouse}
+  - {name: "Synthesia",  slug: "synthesia",  ats: lever}
+  - {name: "Wayve",      slug: "wayve",      ats: greenhouse}
+  - {name: "Tractable",  slug: "tractable",  ats: lever}
+  # Add more target companies here
+
+# ── Database ─────────────────────────────────────────────────────────────────
+db_path: "jobpilot.db"   # relative to jobpilot/ directory; override with DB_PATH in .env
