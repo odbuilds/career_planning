@@ -27,32 +27,41 @@ You are an AI automation research analyst specialising in workflow automation fo
 small businesses with 50-100 employees. Your job is to produce a comprehensive, \
 practical research brief on a specific AI automation use case.
 
+CRITICAL REQUIREMENTS:
+- Every factual claim (costs, time savings, accuracy rates, benchmarks) MUST include a \
+  source_url pointing to the actual web page where you found it.
+- You MUST find at least 2 real named companies that have implemented this automation, \
+  with their actual reported results and the source URL for each. Do not use generic \
+  "Company X" placeholders — use the real organisation name.
+- Use real product names (e.g., "Anthropic Claude", "Azure Document Intelligence", \
+  "Make.com", "Zapier", "n8n", "Nanonets", "Rossum", "UiPath", "Power Automate") \
+  not generic placeholders.
+
 For every use case you must cover ALL of the following sections with real, \
 specific detail (no hand-waving):
 
-1. BUSINESS_PROBLEM – exact pain point, time/cost wasted, who is affected
+1. BUSINESS_PROBLEM – exact pain point, time/cost wasted, who is affected, with cited benchmarks
 2. AUTOMATION_OVERVIEW – concise description of the full automation
 3. WORKFLOW_STAGES – minimum 4 numbered stages with input/process/output for each
-4. TOOLS_AND_TECH – at least 5 specific tool/vendor names with realistic SMB pricing tiers
+4. TOOLS_AND_TECH – at least 5 specific tool/vendor names with realistic SMB pricing tiers and source URLs
 5. IMPLEMENTATION_STEPS – at least 6 concrete steps a company could follow
 6. CHALLENGES – at least 3 realistic challenges with mitigation strategies
-7. METRICS_AND_KPIs – at least 4 measurable KPIs with typical baseline vs target
+7. METRICS_AND_KPIs – at least 4 measurable KPIs with typical baseline vs target and source for benchmarks
 8. INVESTMENT_ESTIMATE – rough cost range (setup + monthly), break-even timeline
-
-Use real product names (e.g., "Anthropic Claude", "Azure Document Intelligence", \
-"Make.com", "Zapier", "n8n", "Nanonets", "Rossum", "UiPath", "Power Automate") \
-not generic placeholders.
+9. COMPANY_EXAMPLES – at least 2 real named companies with actual reported results and source URLs
 
 Respond ONLY with a JSON object matching this exact schema:
 {
   "business_problem": "string",
   "automation_overview": "string",
   "workflow_stages": [{"stage": int, "name": "string", "input": "string", "process": "string", "output": "string"}],
-  "tools_and_tech": [{"name": "string", "role": "string", "smb_tier": "string", "approx_cost": "string"}],
+  "tools_and_tech": [{"name": "string", "role": "string", "smb_tier": "string", "approx_cost": "string", "source_url": "string"}],
   "implementation_steps": ["string"],
   "challenges": [{"challenge": "string", "mitigation": "string"}],
-  "metrics_and_kpis": [{"kpi": "string", "baseline": "string", "target": "string", "measurement": "string"}],
-  "investment_estimate": {"setup_cost": "string", "monthly_cost": "string", "break_even": "string", "fte_savings": "string"}
+  "metrics_and_kpis": [{"kpi": "string", "baseline": "string", "target": "string", "measurement": "string", "source_url": "string"}],
+  "investment_estimate": {"setup_cost": "string", "monthly_cost": "string", "break_even": "string", "fte_savings": "string", "source_url": "string"},
+  "company_examples": [{"company": "string", "industry": "string", "what_they_did": "string", "result": "string", "source_url": "string"}],
+  "sources": [{"title": "string", "url": "string"}]
 }
 """.strip()
 
@@ -191,12 +200,14 @@ Score each criterion 0 (missing), 1 (partial), or 2 (complete):
   C6. github_resources – ≥1 real (or described) GitHub resource
   C7. tutorials        – ≥2 tutorial/article resources
   C8. investment       – setup cost, monthly cost, break-even present
+  C9. company_examples – ≥2 real named companies with results and source URLs
+  C10. citations       – source URLs present on tools, KPIs, and investment figures
 
-Pass threshold: total score ≥ 12 out of 16.
+Pass threshold: total score ≥ 15 out of 20.
 
 Return ONLY a JSON object:
 {
-  "scores": {"C1": int, "C2": int, "C3": int, "C4": int, "C5": int, "C6": int, "C7": int, "C8": int},
+  "scores": {"C1": int, "C2": int, "C3": int, "C4": int, "C5": int, "C6": int, "C7": int, "C8": int, "C9": int, "C10": int},
   "total": int,
   "passed": bool,
   "feedback": "string – concise list of what needs improvement if failed"

@@ -5,10 +5,6 @@ from pathlib import Path
 from use_case_seeds import DEPT_LABELS
 
 
-def _stars(n: int) -> str:
-    return "★" * n + "☆" * (5 - n)
-
-
 def render_md(use_case: dict, research: dict, impl: dict, eval_result: dict) -> str:
     dept_label = DEPT_LABELS.get(use_case["dept"], use_case["dept"].replace("_", " ").title())
     invest = research.get("investment_estimate", {})
@@ -17,6 +13,8 @@ def render_md(use_case: dict, research: dict, impl: dict, eval_result: dict) -> 
     steps = research.get("implementation_steps", [])
     challenges = research.get("challenges", [])
     kpis = research.get("metrics_and_kpis", [])
+    company_examples = research.get("company_examples", [])
+    sources = research.get("sources", [])
     github = impl.get("github_resources", [])
     tutorials = impl.get("tutorial_resources", [])
     score = eval_result.get("total", 0)
@@ -24,13 +22,15 @@ def render_md(use_case: dict, research: dict, impl: dict, eval_result: dict) -> 
     lines = []
 
     # ── Header ─────────────────────────────────────────────────────────────
+    invest_src = invest.get("source_url", "")
+    invest_cite = f" [[source]]({invest_src})" if invest_src else ""
     lines += [
         f"# {use_case['name']}",
         "",
         f"**Department:** {dept_label}  ",
         f"**Use Case ID:** `{use_case['id']}`  ",
-        f"**Completeness Score:** {score}/16  ",
-        f"**Setup Cost:** {invest.get('setup_cost', 'TBD')}  ",
+        f"**Completeness Score:** {score}/20  ",
+        f"**Setup Cost:** {invest.get('setup_cost', 'TBD')}{invest_cite}  ",
         f"**Monthly Cost:** {invest.get('monthly_cost', 'TBD')}  ",
         f"**Break-even:** {invest.get('break_even', 'TBD')}  ",
         f"**FTE Savings:** {invest.get('fte_savings', 'TBD')}  ",
@@ -79,8 +79,11 @@ def render_md(use_case: dict, research: dict, impl: dict, eval_result: dict) -> 
         "|---|---|---|---|",
     ]
     for t in tools:
+        src = t.get("source_url", "")
+        name = t.get("name", "")
+        name_str = f"[**{name}**]({src})" if src else f"**{name}**"
         lines.append(
-            f"| **{t.get('name', '')}** | {t.get('role', '')} | {t.get('smb_tier', '')} | {t.get('approx_cost', '')} |"
+            f"| {name_str} | {t.get('role', '')} | {t.get('smb_tier', '')} | {t.get('approx_cost', '')} |"
         )
     lines.append("")
 
@@ -89,6 +92,25 @@ def render_md(use_case: dict, research: dict, impl: dict, eval_result: dict) -> 
     for i, step in enumerate(steps, 1):
         lines.append(f"{i}. {step}")
     lines.append("")
+
+    # ── Company Examples ────────────────────────────────────────────────────
+    if company_examples:
+        lines += ["## Company Examples", ""]
+        for ex in company_examples:
+            src = ex.get("source_url", "")
+            co = ex.get("company", "")
+            industry = ex.get("industry", "")
+            header = f"**[{co}]({src})**" if src else f"**{co}**"
+            lines += [
+                f"### {co}",
+                "",
+                f"{header} _{industry}_  ",
+                f"**What they did:** {ex.get('what_they_did', '')}  ",
+                f"**Result:** {ex.get('result', '')}  ",
+            ]
+            if src:
+                lines.append(f"**Source:** [{src}]({src})  ")
+            lines.append("")
 
     # ── Real-World Implementations ──────────────────────────────────────────
     lines += ["## Real-World Implementations", ""]
@@ -170,16 +192,20 @@ def render_md(use_case: dict, research: dict, impl: dict, eval_result: dict) -> 
     lines += [
         "## Metrics & KPIs",
         "",
-        "| KPI | Baseline | Target | How to Measure |",
-        "|---|---|---|---|",
+        "| KPI | Baseline | Target | How to Measure | Source |",
+        "|---|---|---|---|---|",
     ]
     for k in kpis:
+        src = k.get("source_url", "")
+        src_str = f"[↗]({src})" if src else "—"
         lines.append(
-            f"| {k.get('kpi', '')} | {k.get('baseline', '')} | {k.get('target', '')} | {k.get('measurement', '')} |"
+            f"| {k.get('kpi', '')} | {k.get('baseline', '')} | {k.get('target', '')} | {k.get('measurement', '')} | {src_str} |"
         )
     lines.append("")
 
     # ── Investment Estimate ─────────────────────────────────────────────────
+    invest_src = invest.get("source_url", "")
+    invest_note = f"\n\n> Benchmarks sourced from: [{invest_src}]({invest_src})" if invest_src else ""
     lines += [
         "## Investment Estimate",
         "",
@@ -189,8 +215,29 @@ def render_md(use_case: dict, research: dict, impl: dict, eval_result: dict) -> 
         f"| Ongoing monthly cost | {invest.get('monthly_cost', 'TBD')} |",
         f"| Break-even timeline | {invest.get('break_even', 'TBD')} |",
         f"| FTE savings equivalent | {invest.get('fte_savings', 'TBD')} |",
+        invest_note,
         "",
     ]
+
+    # ── Sources ─────────────────────────────────────────────────────────────
+    all_sources = list(sources)
+    # Pull any additional URLs from impl tutorials
+    for r in tutorials:
+        url = r.get("url", "")
+        title = r.get("title", url)
+        if url and url != "URL not confirmed":
+            all_sources.append({"title": title, "url": url})
+
+    if all_sources:
+        lines += ["## Sources", ""]
+        seen = set()
+        for s in all_sources:
+            url = s.get("url", "")
+            title = s.get("title", url)
+            if url and url not in seen:
+                lines.append(f"- [{title}]({url})")
+                seen.add(url)
+        lines.append("")
 
     # ── Footer ──────────────────────────────────────────────────────────────
     lines += [
