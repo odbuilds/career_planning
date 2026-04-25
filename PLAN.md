@@ -25,7 +25,14 @@ Google Apps Script (triggered every 10 min)
     │
     ├── 3. Apply Gmail label (create if missing)
     │
-    └── 4. Apply "classified" label → prevents reprocessing
+    ├── 4. Apply "classified" label → prevents reprocessing
+    │
+    └── 5. Increment daily counter (Script Properties)
+
+Google Apps Script (triggered once daily at ~8am)
+    │
+    └── Read daily counter → POST summary → Telegram channel (UrlFetchApp)
+                                             reset counter to 0
 ```
 
 ---
@@ -86,15 +93,52 @@ Model is set as a script constant — easy to swap.
 
 ---
 
+## Daily Telegram Summary
+
+A second time-based trigger fires once per day (e.g. 8am) and sends a digest to a Telegram channel.
+
+**Example message:**
+```
+📬 email-classify daily summary
+Processed: 43 emails
+
+ai/news           18
+ai/tutorial        9
+ai/sales-promo     7
+ai/use-cases       4
+non-ai             3
+ai/unclassified    2
+ai/product-release 0
+```
+
+**How counts are tracked:**
+- Each classification run increments per-category counters stored in GAS `PropertiesService` (key-value store, persists between runs)
+- Daily trigger reads all counters, formats the message, posts to Telegram, then resets counters to 0
+
+**Telegram setup (one-time):**
+1. Create a bot via [@BotFather](https://t.me/BotFather) → get `BOT_TOKEN`
+2. Add the bot to your channel as an admin
+3. Get the `CHAT_ID` (channel's numeric ID, e.g. `@mychannel` or `-1001234567890`)
+4. Store both as GAS Script Properties
+
+**API call** (no library needed):
+```
+POST https://api.telegram.org/bot<BOT_TOKEN>/sendMessage
+{ "chat_id": "<CHAT_ID>", "text": "...", "parse_mode": "Markdown" }
+```
+
+---
+
 ## Files
 
 ```
-Code.gs              # Main Apps Script file (fetch, classify, label)
+Code.gs              # Main Apps Script file (fetch, classify, label, count)
+Telegram.gs          # Daily summary trigger — format + send Telegram message
 Prompt.gs            # System prompt string and few-shot examples
 Config.gs            # Constants: model, own domains, label names
 appsscript.json      # GAS project manifest (OAuth scopes)
 README.md            # Setup instructions
-.env.example         # Reference for OpenRouter API key (stored in GAS Properties)
+.env.example         # Reference for keys stored in GAS Script Properties
 ```
 
 ---
@@ -102,14 +146,18 @@ README.md            # Setup instructions
 ## Setup Steps
 
 1. **Create a new Google Apps Script project** at script.google.com
-2. **Add OpenRouter API key** via Project Settings → Script Properties
-   - Key: `OPENROUTER_API_KEY`
+2. **Add Script Properties** via Project Settings → Script Properties:
+   - `OPENROUTER_API_KEY`
+   - `TELEGRAM_BOT_TOKEN`
+   - `TELEGRAM_CHAT_ID`
 3. **Set own-product domains** in `Config.gs` (`OWN_DOMAINS` array)
 4. **Run `setup()` once manually** — creates all Gmail labels
-5. **Add time-based trigger**: `classifyEmails` → every 10 minutes
+5. **Add triggers**:
+   - `classifyEmails` → time-based, every 10 minutes
+   - `sendDailySummary` → time-based, once per day (8am)
 6. **Authorize** Gmail and external URL scopes on first run
 
-Total setup time: ~15 minutes.
+Total setup time: ~20 minutes.
 
 ---
 
@@ -127,6 +175,7 @@ Total setup time: ~15 minutes.
 - **OpenRouter key** stored in GAS Script Properties (not in source code)
 - **No own-product detection via AI** — domain matching only, to keep prompt simple and avoid false positives
 - **Snippet only** — full email body not sent to model; reduces tokens and avoids sending sensitive content
+- **Telegram counter** uses GAS PropertiesService — survives between runs but resets if the script project is deleted
 
 ---
 
@@ -134,5 +183,5 @@ Total setup time: ~15 minutes.
 
 - Unsubscribe automation
 - Priority scoring within categories
-- Digest/summary emails
-- Mobile notifications
+- Per-email Telegram alerts (only daily digest for now)
+- Mobile push notifications
