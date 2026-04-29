@@ -40,6 +40,7 @@ def test_classify_falls_back_on_unknown_role_type():
     )
     role_type, reasoning = classify(mock_client, "google/gemma-4-26b-a4b-it", "Do magic")
     assert role_type == "builder"
+    assert "Classification failed" in reasoning
 
 
 def test_load_example_returns_content_for_known_type(tmp_path, monkeypatch):

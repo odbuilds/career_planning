@@ -191,10 +191,10 @@ def classify(client: OpenAI, model: str, jd_text: str) -> tuple[str, str]:
     prompt = prompts.CLASSIFY_PROMPT.format(jd_text=jd_text)
     try:
         response, _ = _call_model(client, model, prompt, max_tokens=200, stage="0/classify")
-        match = re.search(r'\{[^}]+\}', response, re.DOTALL)
+        match = re.search(r'\{.*\}', response, re.DOTALL)
         if match:
             data = json.loads(match.group())
-            role_type = data.get("role_type", "builder")
+            role_type = data.get("role_type", "builder").strip()
             reasoning = data.get("reasoning", "")
             if role_type in VALID_ROLE_TYPES:
                 return role_type, reasoning
