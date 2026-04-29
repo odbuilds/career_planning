@@ -18,7 +18,7 @@ def test_classify_parses_valid_json():
     mock_client.chat.completions.create.return_value.choices[0].message.content = (
         '{"role_type": "builder", "reasoning": "Hands-on delivery role."}'
     )
-    role_type, reasoning = classify(mock_client, "google/gemma-4-26b-a4b-it", "Build fast AI tools")
+    role_type, reasoning, _ = classify(mock_client, "google/gemma-4-26b-a4b-it", "Build fast AI tools")
     assert role_type == "builder"
     assert reasoning == "Hands-on delivery role."
 
@@ -28,7 +28,7 @@ def test_classify_falls_back_on_invalid_json():
     mock_client.chat.completions.create.return_value.choices[0].message.content = (
         "I think this is a builder role."
     )
-    role_type, reasoning = classify(mock_client, "google/gemma-4-26b-a4b-it", "Build fast AI tools")
+    role_type, reasoning, _ = classify(mock_client, "google/gemma-4-26b-a4b-it", "Build fast AI tools")
     assert role_type == "builder"
     assert "Classification failed" in reasoning
 
@@ -38,9 +38,18 @@ def test_classify_falls_back_on_unknown_role_type():
     mock_client.chat.completions.create.return_value.choices[0].message.content = (
         '{"role_type": "wizard", "reasoning": "Magic role."}'
     )
-    role_type, reasoning = classify(mock_client, "google/gemma-4-26b-a4b-it", "Do magic")
+    role_type, reasoning, _ = classify(mock_client, "google/gemma-4-26b-a4b-it", "Do magic")
     assert role_type == "builder"
     assert "Classification failed" in reasoning
+
+
+def test_classify_falls_back_on_api_exception():
+    mock_client = MagicMock()
+    mock_client.chat.completions.create.side_effect = Exception("API timeout")
+    role_type, reasoning, t_classify = classify(mock_client, "google/gemma-4-26b-a4b-it", "Build things")
+    assert role_type == "builder"
+    assert "Classification failed" in reasoning
+    assert t_classify == 0.0
 
 
 def test_load_example_returns_content_for_known_type(tmp_path, monkeypatch):

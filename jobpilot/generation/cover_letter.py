@@ -187,20 +187,20 @@ def _call_model(
     return content, elapsed
 
 
-def classify(client: OpenAI, model: str, jd_text: str) -> tuple[str, str]:
+def classify(client: OpenAI, model: str, jd_text: str) -> tuple[str, str, float]:
     prompt = prompts.CLASSIFY_PROMPT.format(jd_text=jd_text)
     try:
-        response, _ = _call_model(client, model, prompt, max_tokens=200, stage="0/classify")
+        response, t_classify = _call_model(client, model, prompt, max_tokens=200, stage="0/classify")
         match = re.search(r'\{.*\}', response, re.DOTALL)
         if match:
             data = json.loads(match.group())
             role_type = data.get("role_type", "builder").strip()
             reasoning = data.get("reasoning", "")
             if role_type in VALID_ROLE_TYPES:
-                return role_type, reasoning
+                return role_type, reasoning, t_classify
     except Exception:
         pass
-    return "builder", "Classification failed — defaulting to builder"
+    return "builder", "Classification failed — defaulting to builder", 0.0
 
 
 def _load_example(role_type: str) -> str:
@@ -227,15 +227,19 @@ def _write_timing_log(
     t_rewrite: float,
     t_total: float,
     critique: str = "",
+    t_classify: float = 0.0,
+    role_type: str = "",
 ) -> None:
     _LOG_FILE.parent.mkdir(exist_ok=True)
     entry = {
         "ts": time.strftime("%Y-%m-%dT%H:%M:%S"),
         "company": company,
         "role": role,
+        "role_type": role_type,
         "draft_model": draft_model,
         "critic_model": critic_model,
         "rewrite_model": rewrite_model,
+        "t_classify": round(t_classify, 2),
         "t_draft": round(t_draft, 2),
         "t_critic": round(t_critic, 2),
         "t_rewrite": round(t_rewrite, 2),
@@ -281,7 +285,7 @@ def generate(
 
     # Classify JD and load branch example
     classify_model = config.pipeline_scoring_model
-    role_type, reasoning = classify(client, classify_model, jd_text)
+    role_type, reasoning, t_classify = classify(client, classify_model, jd_text)
     role_context = f"Role classification: {role_type} — {reasoning}"
     example_letter = _load_example(role_type)
     print(f"  classified as: {role_type} — {reasoning}", flush=True)
@@ -324,7 +328,13 @@ def generate(
     t_total_elapsed = time.perf_counter() - t_total
     print(f"  total: {t_total_elapsed:.1f}s", flush=True)
 
-    _write_timing_log(company, role, fast_model, critic_model, rewrite_model, t_draft, t_critic, t_rewrite, t_total_elapsed, critique=critique)
+    _write_timing_log(
+        company, role, fast_model, critic_model, rewrite_model,
+        t_draft, t_critic, t_rewrite, t_total_elapsed,
+        critique=critique,
+        t_classify=t_classify,
+        role_type=role_type,
+    )
 
     return rewritten
 
