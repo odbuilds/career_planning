@@ -58,6 +58,8 @@ class Config:
         self.llm_scoring_threshold: float = scoring.get("llm_threshold", 6.0)
         self.llm_scoring_model: str = scoring.get("llm_model", "moonshotai/kimi-k2.5")
         self.generation_model: str = scoring.get("generation_model", "moonshotai/kimi-k2.5")
+        self.pipeline_scoring_enabled: bool = scoring.get("pipeline_enabled", False)
+        self.pipeline_scoring_model: str = scoring.get("pipeline_model", "google/gemma-4-26b-a4b-it")
         self.critic_model: str = scoring.get("critic_model", self.generation_model)
         self.rewrite_model: str = scoring.get("rewrite_model", self.generation_model)
 
@@ -77,6 +79,18 @@ class Config:
 
         # Watched companies (Greenhouse/Lever/Ashby)
         self.watched_companies: list[dict] = data.get("watched_companies", [])
+
+        # Workday job boards — companies using Workday ATS with public CXS API
+        self.workday_companies: list[dict] = data.get("workday_companies", [])
+
+        # Pinpoint HQ job boards — companies using Pinpoint ATS
+        self.pinpoint_companies: list[dict] = data.get("pinpoint_companies", [])
+
+        # Playwright-scraped career pages (JS-rendered / bot-protected)
+        self.playwright_companies: list[dict] = data.get("playwright_companies", [])
+
+        # Company watchlist — consulting/services firms to track via LinkedIn
+        self.company_watchlist: list[dict] = data.get("company_watchlist", [])
 
         # DB path — .env overrides profile.yaml
         self.db_path: str = os.environ.get(

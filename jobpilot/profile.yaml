@@ -172,32 +172,33 @@ scoring:
   llm_threshold: 5.0    # keyword score must be >= this to trigger LLM scoring
   llm_model: "google/gemma-4-26b-a4b-it"
   generation_model: "moonshotai/kimi-k2.5"
+
+  # Cascade pipeline scorer: regex → Gemma binary filter → Gemma tier (A/B/C/D or DQ)
+  pipeline_enabled: true
+  pipeline_model: "google/gemma-4-26b-a4b-it"
   critic_model: "moonshotai/kimi-k2"
-  rewrite_model: "anthropic/claude-sonnet-4.6"
+  rewrite_model: "deepseek/deepseek-v4-pro"
   # Alternatives: "google/gemma-4-31b-it", "claude-haiku-4-5-20251001", "claude-sonnet-4-6", "deepseek/deepseek-v3.2"
 
   positive_signals:
-    - {text: "LangGraph",          weight: 0.8}
-    - {text: "LangChain",          weight: 0.5}
-    - {text: "LangSmith",          weight: 0.7}
-    - {text: "agentic",            weight: 0.8}
-    - {text: "multi-agent",        weight: 0.7}
+    - {text: "LangGraph",          weight: 0.4}
+    - {text: "LangChain",          weight: 0.4}
+    - {text: "LangSmith",          weight: 0.4}
+    - {text: "agentic",            weight: 1.0}
+    - {text: "multi-agent",        weight: 0.3}
     - {text: "agent",              weight: 0.5}
-    - {text: "evaluation",         weight: 0.7}
+    - {text: "evaluation",         weight: 1.0}
     - {text: "observability",      weight: 0.5}
     - {text: "tracing",            weight: 0.5}
     - {text: "production",         weight: 0.3}
-    - {text: "conversational AI",  weight: 0.9}
+    - {text: "conversational AI",  weight: 2.0}
     - {text: "voice AI",           weight: 0.6}
     - {text: "NLU",                weight: 0.5}
-    - {text: "Claude",             weight: 0.6}
-    - {text: "Anthropic",          weight: 0.6}
-    - {text: "OpenAI",             weight: 0.3}
     - {text: "n8n",                weight: 1.0}
     - {text: "LLM pipeline",       weight: 0.7}
     - {text: "RAG",                weight: 0.4}
     - {text: "ai workflow",         weight: 0.5}
-    - {text: "remote",             weight: 1.0}
+    - {text: "remote",             weight: 2.0}
     - {text: "Python",             weight: 0.3}
     - {text: "prompt optimization", weight: 0.8}
     - {text: "solutions engineer",  weight: 0.9}
@@ -247,6 +248,8 @@ scoring:
     - "qa automation"
     - "software"
     - "architect"
+    - "python"
+    - "business development"
 
   # Penalise score if these appear in the JD TEXT (subtracts weight from score)
   jd_red_flags:
@@ -440,7 +443,28 @@ discovery:
     - slug: greenhouse
       module: greenhouse_source
       display: "Watched Companies"
-      enabled: false
+      enabled: true
+
+    - slug: workday
+      module: workday_source
+      display: "Workday Job Boards"
+      enabled: true
+      requires_key: false
+      uses_location: false
+
+    - slug: pinpoint
+      module: pinpoint_source
+      display: "Pinpoint Job Boards"
+      enabled: true
+      requires_key: false
+      uses_location: false
+
+    - slug: playwright
+      module: playwright_source
+      display: "Playwright Scrapers"
+      enabled: true
+      requires_key: false
+      uses_location: false
       requires_key: false
       uses_location: false
 
@@ -544,6 +568,14 @@ discovery:
       fetch_jd: false       # set true to fetch full JD text (10 extra HTTP requests per run)
       # extra_query: "site:greenhouse.io OR site:lever.co OR site:ashby.hq.com"
 
+    - slug: companies
+      module: companies_source
+      display: "Consulting Firm Watchlist"
+      enabled: false
+      requires_key: false
+      uses_location: false
+      results_wanted: 200   # LinkedIn results per keyword — higher catches more firms
+
     # Add new sources below. Example (disabled until module is built):
     # - slug: wellfound
     #   module: wellfound_source
@@ -560,12 +592,86 @@ discovery:
 # ── Watched Companies (Greenhouse / Lever / Ashby) ───────────────────────────
 # ats: greenhouse | lever | ashby
 watched_companies:
-  - {name: "Anthropic",  slug: "anthropic",  ats: greenhouse}
-  - {name: "Cohere",     slug: "cohere",     ats: greenhouse}
-  - {name: "Synthesia",  slug: "synthesia",  ats: lever}
-  - {name: "Wayve",      slug: "wayve",      ats: greenhouse}
-  - {name: "Tractable",  slug: "tractable",  ats: lever}
-  # Add more target companies here
+  - {name: "Cohere",                slug: "cohere",                ats: greenhouse}
+  - {name: "Synthesia",             slug: "synthesia",             ats: lever}
+  - {name: "Wayve",                 slug: "wayve",                 ats: greenhouse}
+  - {name: "Tractable",             slug: "tractable",             ats: lever}
+  # UK consulting / AI firms — verified against ATS APIs
+  - {name: "Elixirr",               slug: "elixirr",               ats: greenhouse}
+  - {name: "Northslope Technologies", slug: "northslope-technologies", ats: ashby}
+  - {name: "Dunnhumby",             slug: "dunnhumby",             ats: greenhouse}
+  - {name: "Ensono",                slug: "ensono",                ats: greenhouse}
+  - {name: "Faculty",               slug: "faculty",               ats: ashby}
+  - {name: "Baringa Partners",      slug: "baringa",               ats: greenhouse}
+  - {name: "Datatonic",             slug: "datatonic",             ats: ashby}
+  - {name: "Equal Experts",         slug: "equalexperts",          ats: greenhouse}
+  - {name: "Ancoris",               slug: "ancoris",               ats: greenhouse}
+  - {name: "Agilisys",              slug: "agilisys",              ats: greenhouse}
+
+# ── Workday Job Boards ───────────────────────────────────────────────────────
+# Companies using Workday ATS with a public CXS API endpoint.
+# To add a company: find their careers URL (myworkdayjobs.com/en-US/{jobsite}/jobs)
+# and extract tenant, version (e.g. wd3, wd103), and jobsite.
+workday_companies:
+  - {name: "Unisys",        tenant: "unisys",        version: "wd5", jobsite: "External"}
+  - {name: "DXC Technology", tenant: "dxctechnology", version: "wd1", jobsite: "DXCJobs"}
+  # To add more: find the company's myworkdayjobs.com URL and extract tenant/version/jobsite
+  # Note: large firms with global boards (Accenture etc.) return empty location data — avoid
+
+pinpoint_companies:
+  - {name: "Sabio Group", url: "https://sabio.pinpointhq.com"}
+
+playwright_companies:
+  - name: "NTT Data"
+    url: "https://careers.services.global.ntt/global/en/search-results?keywords=ai"
+    site: phenom
+  - name: "Cognizant"
+    url: "https://careers.cognizant.com/uki-en/jobs/?keyword=ai&location=United+Kingdom&radius=100&lat=&lng=&cname=United+Kingdom&ccode=GB&pagesize=10#results"
+    site: cognizant
+  - name: "LTIMindtree"
+    url: "https://ltimindtree.ripplehire.com/candidate/?token=xviyQvbnyYZdGtozXoNm&lang=en&source=CAREERSITE#list/geo=Denmark%2CFinland%2CIreland%2CLuxembourg%2CNetherlands%2CNorway%2CSweden%2CSwitzerland"
+    site: ripplehire
+  # IBM and CGI blocked: IBM times out on networkidle; CGI hits Radware captcha
+
+# ── Company Watchlist ────────────────────────────────────────────────────────
+# 152 consulting / professional services firms to track via LinkedIn (companies_source).
+# Used by discovery/companies_source.py — enable that source to activate.
+# tier: 1=Global Giants, 2=Large, 3=Mid-Size, 4=Boutique/Specialist
+company_watchlist:
+  # ── Tier 1 — Global Giants ──────────────────────────────────────────────
+  - {name: "Accenture",                    tier: 1}
+  - {name: "Deloitte",                     tier: 1}
+  - {name: "PwC",                          tier: 1}
+  - {name: "KPMG",                         tier: 1}
+  - {name: "EY",                           tier: 1}
+  - {name: "McKinsey & Company",           tier: 1}
+  - {name: "Boston Consulting Group",      tier: 1}
+  - {name: "Bain & Company",               tier: 1}
+  - {name: "Capgemini",                    tier: 1}
+  - {name: "IBM Consulting",               tier: 1}
+  - {name: "Cognizant",                    tier: 1}
+  - {name: "Infosys",                      tier: 1}
+  - {name: "Tata Consultancy Services",    tier: 1}
+  - {name: "Wipro",                        tier: 1}
+  - {name: "HCL Technologies",             tier: 1}
+  - {name: "NTT Data",                     tier: 1}
+  - {name: "DXC Technology",               tier: 1}
+  - {name: "Atos",                         tier: 1}
+  - {name: "CGI",                          tier: 1}
+  - {name: "Sopra Steria",                 tier: 1}
+  - {name: "Avanade",                      tier: 1}
+  - {name: "Fujitsu",                      tier: 1}
+  - {name: "Kyndryl",                      tier: 1}
+  - {name: "Slalom",                       tier: 1}
+  - {name: "Thoughtworks",                 tier: 1}
+  - {name: "EPAM Systems",                 tier: 1}
+  - {name: "GFT Technologies",             tier: 1}
+  - {name: "Leidos",                       tier: 1}
+  - {name: "Booz Allen Hamilton",          tier: 1}
+  - {name: "SAIC",                         tier: 1}
+  - {name: "dxw",                          tier: 4}
+  - {name: "Sabio Group",                  tier: 4}
+
 
 # ── Database ─────────────────────────────────────────────────────────────────
 db_path: "jobpilot.db"   # relative to jobpilot/ directory; override with DB_PATH in .env

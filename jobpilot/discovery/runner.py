@@ -137,6 +137,21 @@ def run_discovery(
                     if llm_val is not None:
                         valid_jobs[idx]["score"] = llm_val
 
+        # Pass 3: cascade pipeline scoring (A/B/C/D or DQ)
+        if config.pipeline_scoring_enabled and config.openrouter_api_key:
+            pipeline_candidates = [
+                {"id": i, "jd_text": j.get("jd_text", "")}
+                for i, j in enumerate(valid_jobs)
+                if j.get("jd_text", "").strip()
+            ]
+            if pipeline_candidates:
+                from core.pipeline_scorer import pipeline_score_batch
+                pipeline_results = pipeline_score_batch(pipeline_candidates, config)
+                for idx, ptier, preason in pipeline_results:
+                    if ptier is not None:
+                        valid_jobs[idx]["pipeline_tier"] = ptier
+                        valid_jobs[idx]["pipeline_reason"] = preason
+
         for job in valid_jobs:
             is_new = _is_new_job(job)
             db.upsert_job(job)
