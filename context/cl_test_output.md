@@ -7,7 +7,7 @@ After rebuilding a sales pipeline that books 20 enterprise demos a week, I want 
 
 Last year I built an n8n-Claude outreach engine that reached 15,000 LinkedIn profiles, achieved a 70 % connection rate and generated 20 qualified demos every week. That same “build once, scale many” mindset underpinned a six-month Dialogflow ES→CX migration I led for a global insurer: I shrank 950 intents to 200, lifted F1 from below 50 % to 96 % on 100,000 monthly calls, and trained the client’s analysts to extend the model themselves—freeing my team to move to the next engagement.
 
-Both projects show the loop Anthropic asks for: own the technical outcome, document the pattern, and hand the client the keys. I’ve repeated that loop across financial services, insurance and pharma for ten years; quotas, SOW reviews and C-suite steering calls are normal work, not résumé garnish.
+Both projects show the loop Anthropic asks for: own the technical outcome, document the pattern, and hand the client the keys. I’ve repeated that loop across financial services, insurance and pharma for five years; quotas, SOW reviews and C-suite steering calls are normal work, not résumé garnish.
 
 I stay in this field because the edge cases win or lose deals. When my vid2doc pipeline kept selecting blurred frames I realised constraints, not bigger models, create reliability—exactly the steerability Anthropic builds into Claude. I want to apply the same optimisation to enterprise agents that will operate under regulatory scrutiny, not just lab benchmarks.
 

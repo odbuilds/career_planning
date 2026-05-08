@@ -20,8 +20,6 @@ AI engineer focused on evaluation infrastructure, production reliability, and qu
 - Designed and built a production agentic pipeline using LangGraph and n8n — multi-stage LLM workflow with automated qualification logic, quality gates, A/B testing framework, and deduplication; 70% engagement rate across 15,000+ processed profiles
 - Led the migration of a high-volume voice bot (100,000+ monthly contacts) from Dialogflow ES to CX — rebuilt NLU architecture using HumanFirst clustering on 2 million customer utterances, reducing intents from 950 to under 200 and improving F1 from below 50% to 96%; the migration also required designing a structured evaluation framework to validate model performance at each stage
 - Evaluated RAG solutions for a Canadian telecommunications company — benchmarked LangChain, Dialogflow CX, Stack AI, and OpenAI GPTs against output accuracy, hallucination rate, implementation complexity, and operational cost; delivered platform-specific implementation guides and a strategic recommendation
-- Led NLU model improvement programmes for enterprise clients — systematic analysis of production conversation data to identify intent classification failures, coverage gaps, and training data weaknesses driving measurable quality improvements
-- Prototype and evaluate agentic AI workflows using LangGraph and HumanFirst — applying a prompt-first development methodology that validates pipeline logic and output schemas before implementation
 
 ### Conversation Engineer — Conversation Design Institute Services
 *October 2021 – October 2023*
@@ -34,19 +32,6 @@ AI engineer focused on evaluation infrastructure, production reliability, and qu
 *July 2021 – April 2023*
 
 - Designed conversational AI experiences and built NLU models for a property management platform, with ongoing quality monitoring and iterative improvement across high-volume interaction workflows
-
----
-
-## Projects
-
-**RAG and Conversational AI Platform Evaluation** *(Client Project — Canadian Telecommunications Company)*
-Systematic comparative evaluation of RAG solutions and conversational AI platforms for large-scale contact centre agent support. Benchmarked LangChain, Dialogflow CX, Stack AI, and OpenAI GPTs against output accuracy, hallucination rate, implementation complexity, and operational cost. Additionally evaluated Microsoft Copilot + Azure CLU against native Copilot NLU — CLU demonstrated measurable accuracy advantages for intent handling, while RAG limitations and hallucination risks were documented with mitigation strategies. Delivered platform-specific best practice guides, a strategic recommendation, and an implementation roadmap enabling stakeholders to make an informed deployment decision. Stack: Dialogflow CX, Microsoft Copilot Studio, Azure CLU, LangChain, Stack AI, OpenAI GPTs.
-
-**LinkedIn Post Agent** *(Personal)*
-Nine-node LangGraph pipeline with GEPA (Generative Evaluation and Prompt Adjustment) integration — binary good/bad quality judge using GPT-4o-mini for evaluation and GPT-4o for reflection. Once a labelled dataset is available, GEPA analyses failure cases, generates candidate prompt revisions, and evaluates them; winning prompt promoted back to HumanFirst without touching pipeline code. LangSmith per-node observability throughout. Stack: LangGraph, HumanFirst, LangSmith, Python.
-
-**LinkedIn Outreach Automation** *(Production)*
-Production pipeline with LLM-powered qualification, A/B testing across messaging variants, and deduplication against an existing database — quality gates preventing repeat outreach and ensuring targeting precision. 70% connection rate, 40% response rate across 15,000+ profiles. Stack: n8n, LangGraph, Claude, Supabase.
 
 ---
 

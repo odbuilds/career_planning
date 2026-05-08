@@ -1,15 +1,13 @@
-Dear Hiring Team,
+Dear Hiring Manager,
 
-I am writing to apply for the Forward Deployed AI Engineer role at IFS. The position sits squarely at what I have spent the last several years building toward: working directly with enterprise customers to design and deploy production AI that solves real operational problems.
+I've spent the past few years doing exactly what this role describes: sitting with teams, understanding what's slowing them down, and building something that fixes it. Not proposing it. Building it.
 
-My background covers the full delivery arc the role demands. At HumanFirst, I have deployed conversational AI and LLM-powered systems for enterprise clients across insurance, financial services, and telecommunications, from scoping and architecture through integration, evaluation, and handoff. Recent work includes LangGraph-based agentic pipelines, LLM-as-judge quality monitoring integrated with BigQuery and Looker, and a voice bot migration that rebuilt the NLU architecture from the ground up and took F1 from below 50% to 96% in production across 100,000 monthly contacts.
+At HumanFirst I designed and delivered an AI enablement programme for a 40-person non-technical business team. Over 60% of participants had built and were actively using their own AI workflows within two months. The work was not just training sessions: it was discovery, prototyping alongside people, helping them see what was possible with tools they already had, and then making sure the solutions actually stuck.
 
-The enterprise integration dimension of this role is familiar ground. I regularly work across API-based integrations with platforms such as Salesforce, ServiceNow, and CRM middleware, and I understand the operational constraints that shape what good AI deployment looks like in mission-critical environments. I am equally comfortable in a technical architecture discussion and in a client discovery session, and much of my work involves translating ambiguous business problems into defined technical approaches and delivering them quickly. A recent POC for a Latin American call centre, analysing 20,000 conversations and building a generative AI classification model for sales objections with a reusable methodology, was completed in one week.
+Alongside that client work I built a production outreach pipeline in n8n after a company restructure eliminated our sales function entirely. LLM-powered qualification across 15,000+ profiles, personalised message generation with A/B testing, automated deduplication and rate-limit handling. It replaced a full sales team's manual prospecting workload and delivered a 70% connection rate, 40% response rate, and 7% demo attendance. I built it scrappy, using what we had, and it worked.
 
-I also understand that deployment is not the finish line. I have designed and delivered enterprise AI training programmes, including one for 40 non-technical staff at a Canadian engineering firm, with the explicit goal of enabling client teams to maintain and improve deployed systems independently. Getting to a stable handoff that the customer can own is something I plan for from the start of any engagement.
+That combination — knowing how to sit with non-technical stakeholders and translate their frustrations into working solutions, and being comfortable enough technically to actually build those solutions — is what makes this role interesting to me.
 
-I would welcome the opportunity to discuss how my experience maps to what IFS is building.
-
-Yours sincerely,
+I would welcome the chance to talk.
 
 Oliver Day

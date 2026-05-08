@@ -26,17 +26,18 @@ TYPE B — AI Consulting / Solutions: solutions engineer, forward deployed engin
 TYPE C - Conversational AI and conversation design
 
 ━━ BOOST (add to score) ━━
-+2.0  Core stack match at least 2 of the following -  LangGraph, LangChain, LangSmith, n8n, agentic, evaluation framework, LLM-as-judge
++0.5  Core stack match at least 2 of the following -  LangGraph, LangChain, LangSmith, n8n, agentic, evaluation framework, LLM-as-judge
 +3.5  Strong domain fit: conversational AI, NLU, contact centre AI, voice AI, , prompt optimisation
 +2.5  Consulting/solutions fit (Type B): solutions engineer, forward deployed engineer, AI enablement, AI adoption lead, AI consultant, AI advisor, fractional CTO/AI, pre-sales with AI domain depth — candidate's consulting background is directly transferable
-+2.0  AI automation or enablement
++3.0  AI automation or enablement
 +4.0  Remote role without stating a specific country
 +1.0  UK-based role (London, Edinburgh, Cambridge, Norwich)
 +0.5  Spain or Europe-based role
 +0.5  Mentions Claude, Anthropic, or OpenAI as primary stack
 
 ━━ PENALISE (subtract from score) ━━
--2.5  Role is primarily software engineering — system design, backend, full-stack, microservices, distributed systems — with AI as secondary or incidental. "AI Engineer" in title but JD is really SWE.
+-3.5  Role is primarily software engineering — system design, backend, full-stack, microservices, distributed systems — with AI as secondary or incidental. "AI Engineer" in title but JD is really SWE.
+-1.0  Heavy focus on production experience
 -2.0  Requires PhD or pure research background
 -3.0  Primary stack is Java, C++, Rust, or Scala with no Python/LLM overlap
 -2.0  Requires hands-on ML experience (model training, fine-tuning, RLHF, MLOps, model architecture) as a core requirement
@@ -165,4 +166,15 @@ def llm_score_batch(jobs: list[dict], config, concurrency: int = 20) -> list[tup
         ]
         return await asyncio.gather(*tasks)
 
-    return asyncio.run(_run())
+    import concurrent.futures
+
+    def _run_in_thread():
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        try:
+            return loop.run_until_complete(_run())
+        finally:
+            loop.close()
+
+    with concurrent.futures.ThreadPoolExecutor(max_workers=1) as ex:
+        return ex.submit(_run_in_thread).result()

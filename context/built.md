@@ -53,21 +53,6 @@ Skills evidenced: multi-step LLM pipeline design, structured JSON prompt chainin
 
 
 
- eval tool
-testing capabilities of building wih humanfirst, humanfirst mcps and claude code 
-
-
-Pipeline to evaluate AI agent execution traces using the PatronusAI TRAIL benchmark (148 annotated OpenTelemetry traces, 841 labelled errors — state-of-the-art LLMs identify only ~11% of them correctly).
-
-Raw traces from HuggingFace are walked span-by-span, harness spans excluded, and uploaded to HumanFirst as structured utterances with full TRAIL labels as metadata. LLM prompts then run over each span to extract semantic dimensions (Action, Reasoning, Plan, Tool Call, Assumption, Decision Point) and sub-attributes (Soundness, Validity, Optimality, etc.). PQL queries over the pipeline outputs enable semantic similarity search and metadata filtering to cluster and detect agent error patterns at scale.
-
-A local browser-based trace viewer (single HTML file + Python server) lets you navigate span trees, see LLM-extracted artifacts inline, pass/fail individual spans, add notes, and upload annotations back to HumanFirst.
-
-Key engineering problems solved: raw traces range from 96K to 9MB — CSV upload failed across six attempts (embedded newlines in LLM output fields); JSON format via HumanFirst objects SDK was the fix. PQL has no joins, so cross-artifact queries (e.g. plan compliance detection) required a two-step approach: find Plans referencing tool use, then check sibling spans for Tool Call artifacts by exampleId.
-
-Stack: Python, HumanFirst (workspaces, prompt pipelines, PQL), HuggingFace datasets, local HTTP server, vanilla JS frontend.
-
-Skills evidenced: agent trace analysis, OpenTelemetry span tree parsing, LLM-as-evaluator prompt design, semantic dimension extraction, PQL query design, data pipeline debugging (format incompatibility at scale), browser-based annotation tooling, HumanFirst SDK.
 
 
 LinkedIn post agent

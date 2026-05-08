@@ -43,18 +43,7 @@ Skills evidenced: multi-step LLM pipeline design, structured JSON prompt chainin
 
 
 
----
 
-### LinkedIn Post Agent
-Takes a rough idea or URL-with-take and produces a LinkedIn post in the user's voice. LangGraph pipeline: idea refinement → optional research → draft writing → tone adjustment → review → conditional rewrite (max 2×) → finalisation.
-
-All LLM calls route through HumanFirst — the code handles routing and Pydantic validation only; model choice, temperature, system prompts, and variable injection are managed in HumanFirst. Prompts were built and tested in HumanFirst before any pipeline code was written: mention syntax failures, inconsistent JSON output from the idea refiner, and over-permissive review calibration were all caught at prompt level against 20 samples before touching a running pipeline. Claude Code built the workspace, collections, intents, and all prompts via the HumanFirst MCP, then built the full LangGraph agent once prompts were validated.
-
-Traces go to LangSmith for per-node observability. GEPA (Generative Evaluation and Prompt Adjustment) integration is built and waiting on a labelled dataset. A dedicated judge optimiser is configured for LinkedIn post quality — binary good/bad classification with reasoning, using GPT-4o-mini for evaluation and GPT-4o for reflection. Once a labelled CSV exists, GEPA analyses failure cases, generates candidate prompt revisions, and evaluates them; the winning prompt gets promoted back into HumanFirst without touching pipeline code.
-
-Stack: LangGraph, HumanFirst (prompts, variable injection, model routing), LangSmith (tracing), Pydantic, Claude Code + HumanFirst MCP.
-
-Skills evidenced: LangGraph pipeline design with conditional routing, prompt-first development methodology, HumanFirst MCP-driven workspace setup, Pydantic validation for LLM output schemas, LangSmith observability, GEPA automated prompt optimisation, separation of prompt logic from routing logic.
 
 ---
 

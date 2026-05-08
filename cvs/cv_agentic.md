@@ -5,7 +5,7 @@ oliver.p.day@gmail.com | +381 603388856 | linkedin.com/in/dayoliver
 
 ## Profile
 
-AI engineer with 10+ years building conversational AI and LLM systems at enterprise scale. Background spans the full arc from managing high-volume contact centre operations through NLU model development to designing and deploying production agentic pipelines. Particular focus on the engineering challenges that appear after the proof of concept — state management across multi-step chains, reliable output validation, quality gates that hold under real-world conditions, and observability that makes failures diagnosable. Work sits at the intersection of pipeline architecture and production reliability: building systems that process real data at scale, behave predictably, and improve over time.
+AI engineer with 5+ years building conversational AI and LLM systems at enterprise scale. Background spans the full arc from managing high-volume contact centre operations through NLU model development to designing and deploying production agentic pipelines. Particular focus on the engineering challenges that appear after the proof of concept — state management across multi-step chains, reliable output validation, quality gates that hold under real-world conditions, and observability that makes failures diagnosable. Work sits at the intersection of pipeline architecture and production reliability: building systems that process real data at scale, behave predictably, and improve over time.
 
 ---
 
@@ -31,19 +31,6 @@ AI engineer with 10+ years building conversational AI and LLM systems at enterpr
 *July 2021 – April 2023*
 
 - Built NLU models and conversational AI workflows for a property management platform, handling high-volume multi-step interactions across tenant and landlord workflows
-
----
-
-## Projects
-
-**LinkedIn Post Agent** *(Personal)*
-Six-node LangGraph pipeline: Idea refinement → optional research → draft → review → conditional rewrite (max 2x) → finalisation. All LLM calls route through HumanFirst — code handles routing and Pydantic validation only; prompts, model selection, and variable injection managed externally. LangSmith tracing per node. GEPA integration built for automated prompt optimisation once labelled dataset is available. Stack: LangGraph, HumanFirst, LangSmith, Python.
-
-**Research Agent with Lovable Frontend** *(Client POC)*
-Multi-step agentic pipeline for account executive intelligence — monitors company and prospect news, identifies outreach opportunities, and drafts personalised emails in the AE's tone of voice. Pipeline: web search → per-URL retrieval and summarisation → opportunity identification → personalised email drafting, iterated over a client list with a structured report and outreach email per company. Improved with a reflection loop: reviews the initial report, identifies gaps, generates new search queries, and rewrites. Main engineering challenge: chained prompts routed through Supabase required careful timeout and error handling. Chosen by the client as a revenue-generating value-add rather than a cost saving. Stack: HumanFirst, Lovable, OpenAI (web search), Supabase.
-
-**LinkedIn Outreach Automation** *(Production)*
-End-to-end pipeline: LLM-powered profile qualification across 15,000+ records, personalised message generation, A/B testing framework, database deduplication, rate-limit handling. 70% connection rate, 40% response rate, 7% demo attendance. Stack: n8n, LangGraph, Claude, Supabase.
 
 ---
 

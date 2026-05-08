@@ -5,7 +5,7 @@ oliver.p.day@gmail.com | +381 603388856 | www.linkedin.com/in/dayoliver
 
 ## Profile
 
-Conversational AI practitioner with 10+ years across the full arc of enterprise AI — from managing large-scale customer service operations through NLU model development to LLM-powered agentic systems. Background spans both sides of the problem: the operational reality of running contact centre AI and the technical work of building, evaluating, and improving it. Work sits at the intersection of implementation and quality — building systems that work in production, not just in demos.
+Conversational AI practitioner with 5+ years across the full arc of enterprise AI — from managing large-scale customer service operations through NLU model development to LLM-powered agentic systems. Background spans both sides of the problem: the operational reality of running contact centre AI and the technical work of building, evaluating, and improving it. Work sits at the intersection of implementation and quality — building systems that work in production, not just in demos.
 
 ---
 
@@ -20,7 +20,6 @@ Conversational AI practitioner with 10+ years across the full arc of enterprise 
 - Led the migration of a high-volume voice bot (100,000+ monthly contacts) from Dialogflow ES to CX — restructured the NLU architecture using HumanFirst clustering on 2 million customer utterances, reducing intents from 950 to under 200 and improving F1 score from below 50% to 96%.
 - Design and deploy conversational AI solutions across Dialogflow, Kore.AI, and Microsoft Copilot for enterprise clients — covering solution architecture, conversation design, NLU model development, and integration with existing operational workflows.
 - Developed and delivered enterprise AI training programmes on prompt engineering and conversational AI, enabling client teams to scale AI adoption across business functions.
-- Prototype and evaluate agentic AI workflows using LangGraph, Claude Code, and HumanFirst — applying a prompt-first methodology that validates pipeline logic before implementation begins.
 
 ### Conversation Engineer — Conversation Design Institute Services
 *October 2021 – October 2023*
@@ -35,16 +34,6 @@ Conversational AI practitioner with 10+ years across the full arc of enterprise 
 *July 2021 – April 2023*
 
 - Designed conversational AI experiences and built NLU models for a property management platform, covering tenant and landlord interactions across the property lifecycle.
-
----
-
-## Projects
-
-**LinkedIn Outreach Automation** *(Production)*
-Automated prospecting pipeline built in n8n — keyword-based LinkedIn scraping, LLM-powered profile qualification, personalised message generation with A/B testing. Reached 15,000+ profiles with a 70% connection rate and generated 20+ qualified demo calls per week.
-
-**Research Agent with Lovable Frontend** *(Client POC)*
-Account executive intelligence tool built for a client — monitors company news, identifies outreach opportunities, and drafts personalised emails in the AE's tone of voice. Built on HumanFirst, Lovable, OpenAI, and Supabase using a multi-step prompt pipeline.
 
 ---
 

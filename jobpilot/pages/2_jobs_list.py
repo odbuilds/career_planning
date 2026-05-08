@@ -18,6 +18,12 @@ PAGE_SIZE = 20
 st.markdown("""
 <style>
     .block-container { padding-left: 1rem; padding-right: 1rem; max-width: 100%; }
+    div[data-testid="stVerticalBlock"] > div[data-testid="stVerticalBlockBorderWrapper"] {
+        padding: 0.35rem 0.6rem;
+    }
+    .compact-score { display: flex; align-items: center; gap: 5px; margin-top: 4px; font-size: 1.85rem; font-weight: 600; }
+    .dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+    .score-label { font-size: 0.65rem; color: #888; margin-bottom: 1px; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -25,7 +31,7 @@ st.header("🔍 Jobs")
 
 # ── Filters ───────────────────────────────────────────────────────────────────
 with st.expander("Filters", expanded=False):
-    col1, col2, col3, col4 = st.columns(4)
+    col1, col2, col3, col4, col5 = st.columns(5)
     with col1:
         _hidden_by_default = {"rejected", "withdrawn", "applied",
                               "screening", "interview", "final", "offer",
@@ -48,12 +54,17 @@ with st.expander("Filters", expanded=False):
         min_score = st.slider("Min score", 0.0, 10.0, 0.0, 0.5)
     with col4:
         search = st.text_input("Search company / role", placeholder="e.g. Anthropic")
+    with col5:
+        if "sort_by" not in st.session_state:
+            st.session_state["sort_by"] = "Score"
+        sort_by = st.radio("Sort by", ["Score", "Tier"], horizontal=True, key="sort_by")
 
 jobs = db.get_jobs(
     status=status_filter or None,
     source=source_filter or None,
     min_score=min_score,
     search=search,
+    sort_by="tier" if sort_by == "Tier" else "score",
 )
 
 # ── Action buttons ────────────────────────────────────────────────────────────
@@ -125,6 +136,10 @@ if st.session_state.get("show_add_form"):
             else:
                 s = score_job(jd_text, config)
                 cv = recommend_cv(jd_text, config)
+                ptier, preason = None, None
+                if config.pipeline_scoring_enabled and jd_text.strip():
+                    from core.pipeline_scorer import pipeline_score
+                    ptier, preason = pipeline_score(jd_text, config)
                 db.upsert_job({
                     "company": company,
                     "role": role,
@@ -134,8 +149,11 @@ if st.session_state.get("show_add_form"):
                     "score": s,
                     "recommended_cv": cv,
                     "status": "discovered",
+                    "pipeline_tier": ptier,
+                    "pipeline_reason": preason,
                 })
-                st.success(f"Added: {company} — {role} (score {s}, CV: {config.get_cv_display_name(cv)})")
+                tier_str = f", Tier: {ptier}" if ptier else ""
+                st.success(f"Added: {company} — {role} (score {s}, CV: {config.get_cv_display_name(cv)}{tier_str})")
                 for key in ("prefill_url", "prefill_company", "prefill_role", "prefill_jd"):
                     st.session_state.pop(key, None)
                 st.session_state["show_add_form"] = False
@@ -287,7 +305,14 @@ if fetch_jds_open:
                 jd = result["jd_text"]
                 new_score = score_job(jd, config)
                 new_cv = recommend_cv(jd, config)
-                db.update_job(job_id_r, {"jd_text": jd, "score": new_score, "recommended_cv": new_cv})
+                updates = {"jd_text": jd, "score": new_score, "recommended_cv": new_cv}
+                if config.pipeline_scoring_enabled:
+                    from core.pipeline_scorer import pipeline_score
+                    ptier, preason = pipeline_score(jd, config)
+                    if ptier is not None:
+                        updates["pipeline_tier"] = ptier
+                        updates["pipeline_reason"] = preason
+                db.update_job(job_id_r, updates)
                 fetched_ok += 1
             progress.progress((i + 1) / len(pending))
 
@@ -348,7 +373,7 @@ else:
 
     for job in page_jobs:
         with st.container(border=True):
-            col_info, col_score, col_cv, col_status, col_actions = st.columns([5, 1, 2, 1.5, 2])
+            col_info, col_score, col_tier, col_cv, col_status, col_actions = st.columns([3, 1, 1, 2, 1.5, 2])
 
             with col_info:
                 url = job.get("url") or ""
@@ -366,13 +391,30 @@ else:
 
             with col_score:
                 score = job.get("score", 0)
-                color = "🟢" if score >= 7 else "🟡" if score >= 4 else "🔴"
-                st.metric("Score", f"{color} {score}")
+                dot_color = "#22c55e" if score >= 7 else "#eab308" if score >= 4 else "#ef4444"
+                st.markdown(
+                    f'<div class="score-label">Score</div>'
+                    f'<div class="compact-score"><span class="dot" style="background:{dot_color}"></span>{score}</div>',
+                    unsafe_allow_html=True,
+                )
+
+            with col_tier:
+                tier = job.get("pipeline_tier")
+                tier_dot = {"A": "#22c55e", "B": "#eab308", "C": "#f97316", "D": "#ef4444", "DQ": "#6b7280"}
+                dot_color = tier_dot.get(tier, "#d1d5db")
+                tier_reason = job.get("pipeline_reason") or ""
+                st.markdown(
+                    f'<div class="score-label">Tier</div>'
+                    f'<div class="compact-score" title="{tier_reason}"><span class="dot" style="background:{dot_color}"></span>{tier or "—"}</div>',
+                    unsafe_allow_html=True,
+                )
 
             with col_cv:
                 cv_slug = job.get("recommended_cv", "cv_draft")
+                full_name = config.get_cv_display_name(cv_slug)
+                short_name = full_name.split(" / ")[0].split(" — ")[0]
                 st.caption("Recommended CV")
-                st.write(config.get_cv_display_name(cv_slug))
+                st.write(short_name)
 
             with col_status:
                 current_status = job.get("status", "discovered")
@@ -388,7 +430,7 @@ else:
                     st.rerun()
 
             with col_actions:
-                view_col, cl_col, apply_col, reject_col = st.columns(4)
+                view_col, apply_col, reject_col = st.columns(3)
                 if view_col.button("View", key=f"view_{job['id']}", use_container_width=True):
                     st.session_state["selected_job_id"] = job["id"]
                     st.switch_page("pages/3_job_detail.py")
@@ -401,25 +443,3 @@ else:
                 if reject_col.button("✕", key=f"reject_{job['id']}", use_container_width=True, help="Reject this job"):
                     st.session_state["reject_job"] = job
                     st.rerun()
-
-                cl_exists = db.get_material(job["id"], "cover_letter") is not None
-                cl_label = "✓ CL" if cl_exists else "Gen CL"
-                if cl_col.button(cl_label, key=f"cl_{job['id']}", use_container_width=True):
-                    if not config.openrouter_api_key:
-                        st.error("Set OPENROUTER_API_KEY in .env to generate cover letters.")
-                    else:
-                        with st.spinner(f"Generating cover letter for {job['company']}..."):
-                            try:
-                                from generation.cover_letter import generate
-                                letter = generate(
-                                    job["company"],
-                                    job["role"],
-                                    job.get("jd_text", ""),
-                                    job.get("recommended_cv", "cv_draft"),
-                                    config,
-                                )
-                                db.save_material(job["id"], "cover_letter", letter)
-                                st.toast(f"Cover letter generated for {job['company']}", icon="✅")
-                                st.rerun()
-                            except Exception as e:
-                                st.error(f"Generation failed: {e}")

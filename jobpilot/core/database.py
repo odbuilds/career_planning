@@ -47,7 +47,9 @@ CREATE TABLE IF NOT EXISTS jobs (
     created_at      TEXT    DEFAULT (datetime('now')),
     applied_at      TEXT    DEFAULT '',
     notes           TEXT    DEFAULT '',
-    location        TEXT    DEFAULT ''
+    location        TEXT    DEFAULT '',
+    pipeline_tier   TEXT    DEFAULT NULL,
+    pipeline_reason TEXT    DEFAULT NULL
 );
 
 CREATE TABLE IF NOT EXISTS materials (
@@ -97,6 +99,10 @@ def init_db(db_path: str | None = None) -> None:
         existing = {row[1] for row in conn.execute("PRAGMA table_info(jobs)")}
         if "location" not in existing:
             conn.execute("ALTER TABLE jobs ADD COLUMN location TEXT DEFAULT ''")
+        if "pipeline_tier" not in existing:
+            conn.execute("ALTER TABLE jobs ADD COLUMN pipeline_tier TEXT DEFAULT NULL")
+        if "pipeline_reason" not in existing:
+            conn.execute("ALTER TABLE jobs ADD COLUMN pipeline_reason TEXT DEFAULT NULL")
 
 
 # ── Jobs ──────────────────────────────────────────────────────────────────────
@@ -133,21 +139,25 @@ def upsert_job(job: dict, db_path: str | None = None) -> int:
         cursor = conn.execute(
             """
             INSERT INTO jobs (company, role, url, jd_text, source, score,
-                              recommended_cv, status, notes, location)
+                              recommended_cv, status, notes, location,
+                              pipeline_tier, pipeline_reason)
             VALUES (:company, :role, :url, :jd_text, :source, :score,
-                    :recommended_cv, :status, :notes, :location)
+                    :recommended_cv, :status, :notes, :location,
+                    :pipeline_tier, :pipeline_reason)
             """,
             {
-                "company":        job.get("company", ""),
-                "role":           job.get("role", ""),
-                "url":            job.get("url", ""),
-                "jd_text":        job.get("jd_text", ""),
-                "source":         source,
-                "score":          job.get("score", 0.0),
-                "recommended_cv": job.get("recommended_cv", "cv_draft"),
-                "status":         status,
-                "location":       job.get("location", ""),
-                "notes":          job.get("notes", ""),
+                "company":         job.get("company", ""),
+                "role":            job.get("role", ""),
+                "url":             job.get("url", ""),
+                "jd_text":         job.get("jd_text", ""),
+                "source":          source,
+                "score":           job.get("score", 0.0),
+                "recommended_cv":  job.get("recommended_cv", "cv_draft"),
+                "status":          status,
+                "location":        job.get("location", ""),
+                "notes":           job.get("notes", ""),
+                "pipeline_tier":   job.get("pipeline_tier"),
+                "pipeline_reason": job.get("pipeline_reason"),
             },
         )
         return cursor.lastrowid
@@ -158,6 +168,7 @@ def get_jobs(
     source: list[str] | None = None,
     min_score: float = 0.0,
     search: str = "",
+    sort_by: str = "score",
     db_path: str | None = None,
 ) -> list[dict]:
     """Flexible job listing with optional filters. Returns list of dicts."""
@@ -183,7 +194,15 @@ def get_jobs(
         params["search"] = f"%{search.lower()}%"
 
     where = " AND ".join(clauses)
-    sql = f"SELECT * FROM jobs WHERE {where} ORDER BY score DESC, created_at DESC"
+    if sort_by == "tier":
+        order = (
+            "CASE pipeline_tier WHEN 'A' THEN 1 WHEN 'B' THEN 2 "
+            "WHEN 'C' THEN 3 WHEN 'D' THEN 4 WHEN 'DQ' THEN 5 ELSE 6 END ASC, "
+            "created_at DESC"
+        )
+    else:
+        order = "score DESC, created_at DESC"
+    sql = f"SELECT * FROM jobs WHERE {where} ORDER BY {order}"
 
     with get_conn(db_path) as conn:
         rows = conn.execute(sql, params).fetchall()
@@ -201,6 +220,7 @@ def update_job(job_id: int, updates: dict, db_path: str | None = None) -> None:
     allowed = {
         "company", "role", "url", "jd_text", "source", "score",
         "recommended_cv", "status", "applied_at", "notes",
+        "pipeline_tier", "pipeline_reason",
     }
     filtered = {k: v for k, v in updates.items() if k in allowed}
     if not filtered:

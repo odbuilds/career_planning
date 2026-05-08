@@ -398,4 +398,15 @@ def pipeline_score_batch(
         ]
         return await asyncio.gather(*tasks)
 
-    return asyncio.run(_run())
+    import concurrent.futures
+
+    def _run_in_thread():
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        try:
+            return loop.run_until_complete(_run())
+        finally:
+            loop.close()
+
+    with concurrent.futures.ThreadPoolExecutor(max_workers=1) as ex:
+        return ex.submit(_run_in_thread).result()

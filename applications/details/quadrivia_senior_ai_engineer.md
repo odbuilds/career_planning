@@ -123,7 +123,7 @@ Belgrade, Serbia (open to remote)
 
 ## Profile
 
-AI engineer with 10+ years building and evaluating conversational AI systems at enterprise scale. Background spans the full arc from high-volume customer interaction management through NLU model development to LLM-powered agentic workflows. Particular focus on evaluation frameworks, production reliability, and quality assurance for systems that need to perform consistently under real-world conditions — including safety-critical contexts where output quality has direct operational consequences. Work sits at the intersection of technical implementation and quality engineering: building systems that are measurable, observable, and improvable in production.
+AI engineer with 5+ years building and evaluating conversational AI systems at enterprise scale. Background spans the full arc from high-volume customer interaction management through NLU model development to LLM-powered agentic workflows. Particular focus on evaluation frameworks, production reliability, and quality assurance for systems that need to perform consistently under real-world conditions — including safety-critical contexts where output quality has direct operational consequences. Work sits at the intersection of technical implementation and quality engineering: building systems that are measurable, observable, and improvable in production.
 
 ## Experience
 

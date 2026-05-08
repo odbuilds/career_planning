@@ -46,7 +46,7 @@ def _build_prompt(
     is_uk: bool,
     role_context: str = "",
     example_letter: str = "",
-) -> str:
+) -> tuple[str, str]:
     relocation_note = ""
     if is_uk:
         relocation_note = (
@@ -56,7 +56,7 @@ def _build_prompt(
             "and are available to do so. Do not make it sound uncertain or apologetic. Place it in the closing paragraph."
         )
 
-    return prompts.DRAFT_PROMPT.format(
+    full = prompts.DRAFT_PROMPT.format(
         role_context=role_context,
         role=role,
         company=company,
@@ -68,6 +68,9 @@ def _build_prompt(
         relocation_note=relocation_note,
         example_letter=example_letter,
     )
+    _, sep, rules_tail = full.partition("# RULES")
+    rules_only = "# RULES" + rules_tail if sep else full
+    return full, rules_only
 
 
 def _build_critic_prompt(
@@ -106,59 +109,6 @@ def _build_rewrite_prompt(
     )
 
 
-def _build_verify_prompt(letter: str, cv_content: str, projects_content: str, snippets_content: str) -> str:
-    return f"""You are a fact-checker for a cover letter. Your only job is to find claims in the letter that cannot be verified in the source materials below.
-
-# SOURCE MATERIALS
-
-**CV:**
-{cv_content}
-
-**Project Evidence:**
-{projects_content}
-
-**Cover Letter Snippets:**
-{snippets_content}
-
-# COVER LETTER TO CHECK
-
-{letter}
-
-# TASK
-
-Go through the letter sentence by sentence. For every specific claim — a number, metric, technology, project name, company name, result, or role description — find where it appears in the source materials.
-
-Output a list of flags in this exact format, one per line:
-
-UNSOURCED: "<exact quote from letter>" — not found in source materials
-SOURCED: "<exact quote from letter>" — found in [CV / Project Evidence / Snippets]
-
-Only flag specific factual claims (numbers, names, results, technologies). Do not flag general statements of intent or opinion.
-If everything checks out, output: ALL SOURCED"""
-
-
-def _build_strip_prompt(letter: str, flags: str) -> str:
-    return f"""A fact-checker has reviewed a cover letter and flagged claims that could not be verified in the candidate's source materials.
-
-# FACT-CHECKER FLAGS
-{flags}
-
-# COVER LETTER
-{letter}
-
-# TASK
-
-Produce a clean version of the letter with every UNSOURCED claim removed or neutralised.
-
-Rules:
-- Remove or generalise any flagged claim. If a sentence loses all meaning without the unsourced claim, remove the whole sentence.
-- Do not replace removed content with anything new. Do not invent alternative claims.
-- Keep all SOURCED content exactly as written.
-- The letter must still read as a coherent whole. Adjust surrounding sentences minimally for flow only — no new substance.
-- If removing claims leaves a paragraph too thin, cut the paragraph rather than pad it.
-
-Output only the cleaned letter. No commentary, no flags, no preamble."""
-
 
 def _call_model(
     client: OpenAI,
@@ -191,29 +141,33 @@ def classify(client: OpenAI, model: str, jd_text: str) -> tuple[str, str, float]
     prompt = prompts.CLASSIFY_PROMPT.format(jd_text=jd_text)
     try:
         response, t_classify = _call_model(client, model, prompt, max_tokens=200, stage="0/classify")
-        match = re.search(r'\{.*\}', response, re.DOTALL)
+        match = re.search(r'\{[^{}]*\}', response, re.DOTALL)
         if match:
             data = json.loads(match.group())
             role_type = data.get("role_type", "builder").strip()
-            reasoning = data.get("reasoning", "")
+            core_need = data.get("core_need", "")
             if role_type in VALID_ROLE_TYPES:
-                return role_type, reasoning, t_classify
+                return role_type, core_need, t_classify
     except Exception:
         pass
-    return "builder", "Classification failed — defaulting to builder", 0.0
+    return "builder", "", 0.0
 
 
 def _load_example(role_type: str) -> str:
-    path = _EXAMPLES_DIR / f"{role_type}.md"
-    if path.exists():
-        return path.read_text(encoding="utf-8")
-    fallback = _EXAMPLES_DIR / "builder.md"
-    if fallback.exists():
-        return fallback.read_text(encoding="utf-8")
+    try:
+        return (_EXAMPLES_DIR / f"{role_type}.md").read_text(encoding="utf-8")
+    except FileNotFoundError:
+        pass
+    if role_type != "builder":
+        try:
+            return (_EXAMPLES_DIR / "builder.md").read_text(encoding="utf-8")
+        except FileNotFoundError:
+            pass
     return ""
 
 
 _LOG_FILE = Path(__file__).parent.parent / "logs" / "cover_letter_timing.jsonl"
+_LOG_FILE.parent.mkdir(exist_ok=True)
 
 
 def _write_timing_log(
@@ -230,7 +184,6 @@ def _write_timing_log(
     t_classify: float = 0.0,
     role_type: str = "",
 ) -> None:
-    _LOG_FILE.parent.mkdir(exist_ok=True)
     entry = {
         "ts": time.strftime("%Y-%m-%dT%H:%M:%S"),
         "company": company,
@@ -283,14 +236,15 @@ def generate(
     critic_model = config.critic_model
     rewrite_model = config.rewrite_model
 
-    # Classify JD and load branch example
     classify_model = config.pipeline_scoring_model
-    role_type, reasoning, t_classify = classify(client, classify_model, jd_text)
-    role_context = f"Role classification: {role_type} — {reasoning}"
+    role_type, core_need, t_classify = classify(client, classify_model, jd_text)
+    role_context = f"Role type: {role_type}"
+    if core_need:
+        role_context += f"\nCore hiring need: {core_need}"
     example_letter = _load_example(role_type)
-    print(f"  classified as: {role_type} — {reasoning}", flush=True)
+    print(f"  classified as: {role_type} — {core_need}", flush=True)
 
-    draft_prompt = _build_prompt(
+    draft_prompt, draft_rules = _build_prompt(
         company, role, jd_text, cv_content,
         projects_content, snippets_content, config, is_uk,
         role_context=role_context,
@@ -316,9 +270,9 @@ def generate(
     critic_prompt = _build_critic_prompt(draft, jd_text, role, company, role_context=role_context)
     critique, t_critic = _call_model(client, critic_model, critic_prompt, max_tokens=8000, stage="2/critic", debug_dir=debug_dir)
 
-    # Stage 3: rewrite (main model) — same source materials as the drafter
+    # Stage 3: rewrite (main model)
     rewrite_prompt = _build_rewrite_prompt(
-        draft, critique, draft_prompt,
+        draft, critique, draft_rules,
         cv_content, projects_content, snippets_content,
         role_context=role_context,
     )

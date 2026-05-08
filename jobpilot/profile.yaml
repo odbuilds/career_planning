@@ -35,6 +35,8 @@ target_roles:
   - "CX AI Transformation"
   - "Conversational AI Product Manager"
   - "CX AI Product Manager"
+  - "Ai innovation"
+  - "ai strategist"
 
 fallback_roles:
   - "Conversation Designer"
@@ -170,14 +172,14 @@ scoring:
   # Set llm_enabled: false to disable without removing config.
   llm_enabled: true
   llm_threshold: 5.0    # keyword score must be >= this to trigger LLM scoring
-  llm_model: "google/gemma-4-26b-a4b-it"
+  llm_model: "google/gemma-4-31b-it"
   generation_model: "moonshotai/kimi-k2.5"
 
   # Cascade pipeline scorer: regex → Gemma binary filter → Gemma tier (A/B/C/D or DQ)
   pipeline_enabled: true
   pipeline_model: "google/gemma-4-26b-a4b-it"
   critic_model: "moonshotai/kimi-k2"
-  rewrite_model: "deepseek/deepseek-v4-pro"
+  rewrite_model: "anthropic/claude-sonnet-4-6"
   # Alternatives: "google/gemma-4-31b-it", "claude-haiku-4-5-20251001", "claude-sonnet-4-6", "deepseek/deepseek-v3.2"
 
   positive_signals:
@@ -279,18 +281,17 @@ discovery:
     - "chatbot"
     - "ai consultant"
     - "ai solutions"
-    - "conversational AI"
+    - "conversational"
     - "generative AI"
     - "forward deployed engineer"
     - "solutions engineer AI"
+    - "solutions engineer"
     - "AI enablement"
     - "AI professional services"
     - "AI transformation" 
     - "ai customer experience"
     - "AI product manager"
-    - "ai customer experience"
     - "agentic"
-    - "conversational"
 
   default_days_old: 7
 

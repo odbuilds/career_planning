@@ -1,15 +1,13 @@
-Dear Hiring Team,
+Dear Hiring Manager,
 
-The Everfield AI enablement role is one of the most directly aligned opportunities I have seen to what I actually do: go into organisations, show people what is possible with AI, build working things alongside them, and stay until it sticks. That description maps closely to the last three years of my work, and it is why I am applying.
+I've spent the past few years doing exactly what this role describes: sitting with teams, understanding what's slowing them down, and building something that fixes it. Not proposing it. Building it.
 
-My background sits at the intersection of technical AI delivery and enablement. At HumanFirst I have designed and deployed LLM-powered systems for enterprise clients across insurance, financial services, and telecommunications, and delivered hands-on AI training programmes to technical and non-technical teams alike. A programme for 40 non-technical staff at a Canadian engineering firm moved participants from zero to building and maintaining their own AI workflows in two months, with over 60% sustaining weekly usage.
+At HumanFirst I designed and delivered an AI enablement programme for a 40-person non-technical business team. Over 60% of participants had built and were actively using their own AI workflows within two months. The work was not just training sessions: it was discovery, prototyping alongside people, helping them see what was possible with tools they already had, and then making sure the solutions actually stuck.
 
-On the technical side, I work across the full stack of tools the role requires. I build agentic pipelines in LangGraph and n8n, design prompt evaluation frameworks, work with RAG systems, and have hands-on experience with Claude Code and AI-augmented development workflows.
+Alongside that client work I built a production outreach pipeline in n8n after a company restructure eliminated our sales function entirely. LLM-powered qualification across 15,000+ profiles, personalised message generation with A/B testing, automated deduplication and rate-limit handling. It replaced a full sales team's manual prospecting workload and delivered a 70% connection rate, 40% response rate, and 7% demo attendance. I built it scrappy, using what we had, and it worked.
 
-I am aware that my experience sits above the stated range for this role. I would rather be transparent about that than pretend otherwise. What it means in practice is that Everfield gets someone who can operate independently from day one and compress the ramp across portfolio companies. What I am genuinely looking for is the Everfield enablement model itself: working across an entire portfolio, learning how AI adoption gets driven at scale across diverse organisations, and developing that craft under someone who has already built it. That is not something I can get anywhere else.
+That combination — knowing how to sit with non-technical stakeholders and translate their frustrations into working solutions, and being comfortable enough technically to actually build those solutions — is what makes this role interesting to me.
 
-I am excited about the Everfield model and would welcome the opportunity to talk about how I can contribute.
-
-Yours sincerely,
+I would welcome the chance to talk.
 
 Oliver Day

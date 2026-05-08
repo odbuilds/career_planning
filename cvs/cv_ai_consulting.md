@@ -5,7 +5,7 @@ oliver.p.day@gmail.com | +381 603388856 | linkedin.com/in/dayoliver
 
 ## Profile
 
-AI consultant with 10+ years delivering AI across enterprise clients in financial services, insurance, pharmaceutical, telecommunications, and property technology. Work spans the full consulting value chain: translating ambiguous business problems into implementable AI solutions, building and deploying production systems, designing evaluation frameworks that prove they work, and enabling client teams to operate and improve them independently. Equally at home in a scoping workshop with business stakeholders and in the technical implementation — which means fewer handoff failures and faster delivery. Track record of projects that generate measurable outcomes rather than proofs-of-concept that stall before production.
+AI consultant with 5+ years delivering AI across enterprise clients in financial services, insurance, pharmaceutical, telecommunications, and property technology. Work spans the full consulting value chain: translating ambiguous business problems into implementable AI solutions, building and deploying production systems, designing evaluation frameworks that prove they work, and enabling client teams to operate and improve them independently. Equally at home in a scoping workshop with business stakeholders and in the technical implementation — which means fewer handoff failures and faster delivery. Track record of projects that generate measurable outcomes rather than proofs-of-concept that stall before production.
 
 ---
 
@@ -21,11 +21,7 @@ Delivered AI consulting engagements across insurance, financial services, teleco
 - Led the migration of a high-volume voice bot (100,000+ monthly contacts) from Dialogflow ES to CX. Ran HumanFirst clustering across 2 million customer utterances to restructure the NLU architecture, reducing intents from 950 to under 200 and improving F1 score from below 50% to 96%.
 - Conducted a structured evaluation of RAG solutions for a Canadian telecommunications firm, comparing LangChain, Dialogflow CX, Stack AI, and OpenAI GPTs across accuracy, hallucination rate, implementation complexity, and operational cost. Delivered platform-specific implementation guides and a strategic recommendation to guide a large-scale contact centre deployment.
 - Applied GPT-4 to analyse 20,000+ customer reviews across four competitors for an online marketplace, building a hierarchical taxonomy of issues and mapping findings against business objectives to identify strategic gaps. Delivered interactive Plotly visualisations for stakeholder presentation.
-- Led a strategic proof-of-concept for a Canadian parcel delivery firm evaluating Microsoft Copilot integrated with Azure CLU. Analysed 10,000 customer service conversations to generate intent taxonomies and automated flow designs; delivered a technical risk assessment covering RAG limitations and hallucination risks within four weeks.
-- Executed a rapid POC for a Latin American call centre, analysing 20,000+ conversations to classify sales objections and successful response strategies using generative AI. Delivered actionable methodology within one week, enabling the client to implement independently.
-- Processed 50,000+ customer conversations for a European CPaaS provider to generate a structured FAQ knowledge base optimised for RAG implementation, pairing problem descriptions with step-by-step resolution guides.
 - Designed and delivered a two-month generative AI training programme for a Canadian engineering firm, transforming 40 non-technical business users into active AI practitioners. Achieved 60%+ adoption with participants independently implementing use cases across marketing, operations, and process improvement.
-- Designed and built a production LLM pipeline for internal product development: scraped and qualified 15,000+ LinkedIn profiles, generated personalised outreach at scale with A/B testing across messaging variants, and produced 20+ qualified demo calls per week — replacing a sales team function with a two-person operation.
 
 ### Conversation Engineer — Conversation Design Institute Services
 *October 2021 – October 2023*
