@@ -13,6 +13,27 @@ import re
 import openai
 from openai import AsyncOpenAI, OpenAI
 
+
+def _extract_json(raw: str) -> dict:
+    """Extract the first valid JSON object from raw text, tolerating nested braces."""
+    # Strip markdown fences
+    if raw.startswith("```"):
+        lines = raw.splitlines()[1:]
+        if lines and lines[-1].strip() == "```":
+            lines = lines[:-1]
+        raw = "\n".join(lines).strip()
+    # Try direct parse first
+    try:
+        return json.loads(raw)
+    except json.JSONDecodeError:
+        pass
+    # Fall back: first { to last }
+    start = raw.find('{')
+    end = raw.rfind('}')
+    if start != -1 and end != -1 and end > start:
+        return json.loads(raw[start:end + 1])
+    raise ValueError(f"No JSON object found in response: {raw[:200]}")
+
 try:
     from langdetect import detect, LangDetectException
     _LANGDETECT_AVAILABLE = True
@@ -150,17 +171,7 @@ def _gemma_filter(jd_text: str, client: OpenAI, model: str) -> tuple[str, str | 
             max_tokens=100,
         )
         raw = response.choices[0].message.content or ""
-        # Strip markdown fences
-        if raw.startswith("```"):
-            lines = raw.splitlines()[1:]
-            if lines and lines[-1].strip() == "```":
-                lines = lines[:-1]
-            raw = "\n".join(lines).strip()
-        # Extract first JSON object
-        m = re.search(r'\{[^{}]*\}', raw, re.DOTALL)
-        if m:
-            raw = m.group(0)
-        flags = json.loads(raw)
+        flags = _extract_json(raw)
         for key in ("research", "swe_heavy", "ds_heavy", "sales_performance"):
             if key not in flags:
                 return ('continue', None, {'parse_error': f'missing key {key}', 'raw': raw})
@@ -250,15 +261,7 @@ def _gemma_tier_scorer(jd_text: str, client: OpenAI, model: str) -> tuple[str, s
             max_tokens=200,
         )
         raw = (response.choices[0].message.content or "").strip()
-        if raw.startswith("```"):
-            lines = raw.splitlines()[1:]
-            if lines and lines[-1].strip() == "```":
-                lines = lines[:-1]
-            raw = "\n".join(lines).strip()
-        m = re.search(r'\{[^{}]*\}', raw, re.DOTALL)
-        if m:
-            raw = m.group(0)
-        data = json.loads(raw)
+        data = _extract_json(raw)
         tier = str(data.get("tier", "C")).upper()
         if tier not in ("A", "B", "C", "D"):
             tier = "C"
@@ -325,15 +328,7 @@ async def _score_one_async(
                 max_tokens=100,
             )
             raw2 = (resp2.choices[0].message.content or "").strip()
-            if raw2.startswith("```"):
-                lines = raw2.splitlines()[1:]
-                if lines and lines[-1].strip() == "```":
-                    lines = lines[:-1]
-                raw2 = "\n".join(lines).strip()
-            m2 = re.search(r'\{[^{}]*\}', raw2, re.DOTALL)
-            if m2:
-                raw2 = m2.group(0)
-            flags = json.loads(raw2)
+            flags = _extract_json(raw2)
             if flags.get("research"):
                 return (idx, 'DQ', "Stage 2: research-role")
             if flags.get("swe_heavy"):
@@ -355,15 +350,7 @@ async def _score_one_async(
                 max_tokens=200,
             )
             raw3 = (resp3.choices[0].message.content or "").strip()
-            if raw3.startswith("```"):
-                lines = raw3.splitlines()[1:]
-                if lines and lines[-1].strip() == "```":
-                    lines = lines[:-1]
-                raw3 = "\n".join(lines).strip()
-            m3 = re.search(r'\{[^{}]*\}', raw3, re.DOTALL)
-            if m3:
-                raw3 = m3.group(0)
-            data3 = json.loads(raw3)
+            data3 = _extract_json(raw3)
             tier = str(data3.get("tier", "C")).upper()
             if tier not in ("A", "B", "C", "D"):
                 tier = "C"
